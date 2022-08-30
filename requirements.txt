@@ -3,4 +3,4 @@ nwbwidgets
 nwbinspector
 ndx-pose
 ndx-events
-
+ndx_sound

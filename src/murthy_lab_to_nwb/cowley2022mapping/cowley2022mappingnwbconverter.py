@@ -5,7 +5,8 @@ from neuroconv.datainterfaces import (
     MovieInterface,
 )
 
-from murthy_lab_to_nwb.cowley2022mapping import Cowley2022MappingBehaviorInterface
+from murthy_lab_to_nwb.cowley2022mapping import Cowley2022MappingBehaviorInterface 
+from .cowley2022mappingaudiointerface import Cowley2022MappingAudioInterface
 
 
 class Cowley2022MappingNWBConverter(NWBConverter):
@@ -13,5 +14,6 @@ class Cowley2022MappingNWBConverter(NWBConverter):
 
     data_interface_classes = dict(
         Movie=MovieInterface,
+        Audio=Cowley2022MappingAudioInterface,
         Behavior=Cowley2022MappingBehaviorInterface,
     )

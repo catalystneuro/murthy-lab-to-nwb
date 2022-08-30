@@ -7,8 +7,8 @@ import pandas as pd
 
 
 from pynwb.file import NWBFile, ProcessingModule
-from ndx_pose import PoseEstimationSeries, PoseEstimation
 from neuroconv.basedatainterface import BaseDataInterface
+from ndx_pose import PoseEstimationSeries, PoseEstimation
 from ndx_events import LabeledEvents
 
 
@@ -22,7 +22,8 @@ class Cowley2022MappingBehaviorInterface(BaseDataInterface):
         file_name = f"S_{subject}.mat"
 
         self.sound_and_joints_data_path = joint_positions_data_dir / cell_line_dir_name / file_name
-
+        assert self.sound_and_joints_data_path.is_file(), "joint joints and sound file not found"
+    
     def get_metadata(self):
         # Automatically retrieve as much metadata as possible
         return dict()
