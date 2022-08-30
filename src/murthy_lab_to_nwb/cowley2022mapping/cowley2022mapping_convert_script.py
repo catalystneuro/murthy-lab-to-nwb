@@ -72,7 +72,7 @@ metadata = dict_deep_update(metadata, editable_metadata)
 # Set conversion options and run conversion
 conversion_options = dict(
     Movie=dict(external_mode=True, stub_test=stub_test),
-    Audio=dict(),
+    Audio=dict(stub_test=stub_test),
     Behavior=dict(),
 )
 converter.run_conversion(
