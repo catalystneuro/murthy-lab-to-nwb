@@ -38,7 +38,7 @@ fly_number = fly_number.rjust(2, "0")  # Pad with 0s
 video_string = f"{cell_string}{fly_number}"
 video_file_paths = [path for path in video_dir_path.iterdir() if video_string in path.stem]
 source_data = dict(
-    Movie=dict(file_paths=video_file_paths),
+    #Movie=dict(file_paths=video_file_paths),
     Audio=dict(
         subject=subject,
         lobula_columnar_neuron_cell_line=lobula_columnar_neuron_cell_line,
