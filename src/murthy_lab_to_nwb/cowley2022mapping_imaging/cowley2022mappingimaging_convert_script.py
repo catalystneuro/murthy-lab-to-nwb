@@ -13,13 +13,15 @@ stub_test = True
 
 # Data directories
 all_subjects_info_path = Path(__file__).parent / "all_subjects.yaml"
-all_subjects_info = load_dict_from_file(all_subjects_info_path)
 data_dir_path = Path("/home/heberto/Murthy-data-share/one2one-mapping")
 tiff_dir_path = data_dir_path / "raw_data" / "calcium_imaging" / "example_tiffs"
+roi_responses_dir_path = data_dir_path / "processed_data" / "LC_responses_dFf" / "responses"
+
 output_path = Path("/home/heberto/conversion_nwb/nwb/")
 if stub_test:
     output_path = output_path.parent / "nwb_stub"
 
+all_subjects_info = load_dict_from_file(all_subjects_info_path)
 
 # All of this are in `all_subjects` here we only have video for the following subject
 subject = "210803_201"
@@ -29,12 +31,13 @@ lobula_columnar_neuron_cell_line = "LC11"
 experiment = "imagining"
 example_session_id = f"{experiment}_{lobula_columnar_neuron_cell_line}_{subject}"
 nwbfile_path = output_path / f"{example_session_id}.nwb"
+source_data = dict()
 
+# Confirm with authors between sampling 30 (as for the stimuli) vs 50 (as in the paper)
+#source_data.update(dict(Imaging=dict(subject=subject, tiff_dir_path=str(tiff_dir_path), sampling_frequency=50)))
 
-# Extract only the number as this is used in the file paths of the videos.
-source_data = dict(
-    Imaging=dict(subject=subject, tiff_dir_path=str(tiff_dir_path), sampling_frequency=50),
-)
+responses_file_path = roi_responses_dir_path / f"{lobula_columnar_neuron_cell_line}.pkl"
+source_data.update(dict(Behavior=dict(responses_file_path=str(responses_file_path), subject=subject)))
 
 converter = Cowley2022MappingImagingNWBConverter(source_data=source_data)
 

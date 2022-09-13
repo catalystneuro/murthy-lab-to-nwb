@@ -8,7 +8,7 @@ from roiextractors import ScanImageTiffImagingExtractor
 
 
 
-class Cowley2022MappginImagingInterface(BaseImagingExtractorInterface):
+class Cowley2022MappingImagingMultipleInterface(BaseImagingExtractorInterface):
     Extractor = MultiImagingExtractor
 
     def __init__(
