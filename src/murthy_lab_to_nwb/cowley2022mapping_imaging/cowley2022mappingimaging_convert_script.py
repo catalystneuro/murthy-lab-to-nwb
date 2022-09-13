@@ -28,7 +28,7 @@ subject = "210803_201"
 lobula_columnar_neuron_cell_line = "LC11"
 # lobula_columnar_neuron_cell_line = "LC17"
 
-experiment = "imagining"
+experiment = "imaging"
 example_session_id = f"{experiment}_{lobula_columnar_neuron_cell_line}_{subject}"
 nwbfile_path = output_path / f"{example_session_id}.nwb"
 source_data = dict()
