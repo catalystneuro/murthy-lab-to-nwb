@@ -41,9 +41,9 @@ class Cowley2022MappingSegmentationExtractor(SegmentationExtractor):
 
         # Set attributes
         self._times = timestamps
-        
+
         self._roi_response_dff = calcium_trace[:, np.newaxis]  # To account for one roi/unit
-        
+
         # Set image mask
         self._image_masks = np.ones(shape=(256, 256, 1))
 
@@ -58,8 +58,6 @@ class Cowley2022MappingSegmentationExtractor(SegmentationExtractor):
     def get_rejected_list(self):
 
         return []
-    
-    
 
 
 class Colwey2022MappingSegmentationInterface(BaseSegmentationExtractorInterface):

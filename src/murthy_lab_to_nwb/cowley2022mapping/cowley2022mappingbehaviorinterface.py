@@ -1,6 +1,7 @@
 """Primary class defining conversion of experiment-specific behavior."""
 from neuroconv.basedatainterface import BaseDataInterface
 
+
 class Cowley2022MappingBehaviorInterface(BaseDataInterface):
     """My behavior interface docstring"""
 

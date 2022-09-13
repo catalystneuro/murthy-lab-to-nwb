@@ -48,11 +48,11 @@ class Cowley2022MappingImagingBehaviorInterface(BaseDataInterface):
 
         # Order by starting time
         sorted_trial_dict_list = sorted(trial_dict_list, key=lambda x: x["start_time"])
-        
+
         # Add extra columns, descriptions are taken from the provided Readme files with the data
         autor_description = f"is a string of the stimulus class, these include: 'benoptstim', 'looming', 'angular_velocity', 'sweeping_spot', 'adamstim', 'benstim'"
         nwbfile.add_trial_column(name="stimulus", description=autor_description)
-        autor_description =  f"is a string of the specific stimulus"
+        autor_description = f"is a string of the specific stimulus"
         nwbfile.add_trial_column(name="stimulus_name", description=autor_description)
 
         [nwbfile.add_trial(**row_dict) for row_dict in sorted_trial_dict_list]
