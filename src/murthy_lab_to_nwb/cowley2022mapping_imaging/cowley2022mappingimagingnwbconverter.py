@@ -2,8 +2,11 @@
 
 from neuroconv import NWBConverter
 
-from murthy_lab_to_nwb.cowley2022mapping_imaging import Cowley2022MappingImagingMultipleInterface
-from murthy_lab_to_nwb.cowley2022mapping_imaging import Cowley2022MappingImagingBehaviorInterface
+from murthy_lab_to_nwb.cowley2022mapping_imaging import (
+    Cowley2022MappingImagingMultipleInterface,
+    Cowley2022MappingImagingBehaviorInterface,
+    Colwey2022MappingSegmentationInterface,
+)
 
 
 class Cowley2022MappingImagingNWBConverter(NWBConverter):
@@ -11,5 +14,6 @@ class Cowley2022MappingImagingNWBConverter(NWBConverter):
 
     data_interface_classes = dict(
         Imaging=Cowley2022MappingImagingMultipleInterface,
+        Segmentation=Colwey2022MappingSegmentationInterface,
         Behavior=Cowley2022MappingImagingBehaviorInterface,
     )
