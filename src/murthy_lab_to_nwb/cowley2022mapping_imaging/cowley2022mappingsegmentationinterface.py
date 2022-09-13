@@ -41,6 +41,7 @@ class Cowley2022MappingSegmentationExtractor(SegmentationExtractor):
 
         # Set attributes
         self._times = timestamps
+        
         self._roi_response_dff = calcium_trace[:, np.newaxis]  # To account for one roi/unit
         
         # Set image mask
