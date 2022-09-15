@@ -41,7 +41,7 @@ source_data = dict()
 # Add movie interface (path stem example 161101_10a05.avi)
 video_string = f"{cell_string}{fly_number}"
 video_file_paths = [path for path in video_dir_path.iterdir() if video_string in path.stem]
-#source_data.update(Movie=dict(file_paths=video_file_paths))
+# source_data.update(Movie=dict(file_paths=video_file_paths))
 
 # Add audio interface (path stem example 161101_10a05bin.mat)
 audio_string = f"{cell_string}{fly_number}"
