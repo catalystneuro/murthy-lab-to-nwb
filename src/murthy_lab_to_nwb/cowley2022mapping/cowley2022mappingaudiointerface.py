@@ -24,7 +24,7 @@ class Cowley2022MappingAudioInterface(BaseDataInterface):
     def run_conversion(self, nwbfile: NWBFile, metadata: dict, stub_test: bool = False):
         # All the custom code to write through PyNWB
         audio_dict = loadmat(self.audio_file_path, squeeze_me=True)
-        audio_data = audio_dict["data"] # This dat is int16
+        audio_data = audio_dict["data"]  # This dat is int16
 
         conversion = 1.0 / audio_dict["dataScalingFactor"]
         # This will cast return the value in floats

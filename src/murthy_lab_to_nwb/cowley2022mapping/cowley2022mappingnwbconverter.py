@@ -5,7 +5,7 @@ from neuroconv.datainterfaces import (
     MovieInterface,
 )
 
-from murthy_lab_to_nwb.cowley2022mapping import Cowley2022MappingBehaviorInterface 
+from murthy_lab_to_nwb.cowley2022mapping import Cowley2022MappingBehaviorInterface
 from .cowley2022mappingaudiointerface import Cowley2022MappingAudioInterface
 
 
