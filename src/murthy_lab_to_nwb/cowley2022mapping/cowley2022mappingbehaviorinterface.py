@@ -43,8 +43,8 @@ class Cowley2022MappingBehaviorInterface(BaseDataInterface):
         # Extract the sounds data
         pulse_times = sound_and_joints_data["pulse_times"]  # The timestamps of the pulse event
         pulse_types = sound_and_joints_data["pulse_types"]  # The type (0 is slow and 1 is fast)
-        sine_present =sound_and_joints_data["sine_present"]  # A bolean array indicating presence of s      
-        
+        sine_present = sound_and_joints_data["sine_present"]  # A bolean array indicating presence of s
+
         # Extract slow and fast pulses timestamps
         pslow_mask = pulse_types == 0
         pfast_mask = ~pslow_mask
