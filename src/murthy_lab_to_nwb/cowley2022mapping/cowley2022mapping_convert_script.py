@@ -28,6 +28,10 @@ subject = "fly5"
 lobula_columnar_neuron_cell_line = "LC10a"
 # lobula_columnar_neuron_cell_line = "LC17"
 
+# Some parsing for file_path location
+cell_string = lobula_columnar_neuron_cell_line[2:]  # Only the number is used in the video file paths.
+fly_number = subject[3:].rjust(2, "0")  # Pad with 0s
+
 experiment = "courtship_behavior"
 example_session_id = f"{experiment}_{lobula_columnar_neuron_cell_line}_{subject}"
 nwbfile_path = output_path / f"{example_session_id}.nwb"
@@ -35,16 +39,12 @@ nwbfile_path = output_path / f"{example_session_id}.nwb"
 source_data = dict()
 
 # Add movie interface (path stem example 161101_10a05.avi)
-cell_string = lobula_columnar_neuron_cell_line[2:]  # Only the number is used in the video file paths.
-fly_number = subject[3:]
-fly_number = fly_number.rjust(2, "0")  # Pad with 0s
 video_string = f"{cell_string}{fly_number}"
 video_file_paths = [path for path in video_dir_path.iterdir() if video_string in path.stem]
-# source_data.update(Movie=dict(file_paths=video_file_paths))
+#source_data.update(Movie=dict(file_paths=video_file_paths))
 
 # Add audio interface (path stem example 161101_10a05bin.mat)
-padded_subject = subject[3:].rjust(2, "0")
-audio_string = f"{lobula_columnar_neuron_cell_line[2:]}{padded_subject}"
+audio_string = f"{cell_string}{fly_number}"
 audio_path = next(path for path in audio_dir_path.iterdir() if audio_string in path.stem)
 audio_file_path = audio_dir_path / audio_path
 source_data.update(Audio=dict(file_path=str(audio_file_path)))
@@ -57,7 +57,6 @@ source_data.update(
         data_dir_path=str(data_dir_path),
     )
 )
-
 
 converter = Cowley2022MappingNWBConverter(source_data=source_data)
 
@@ -76,6 +75,9 @@ metadata["NWBFile"]["session_start_time"] = datetime.datetime(
 editable_metadata_path = Path(__file__).parent / "cowley2022mapping_metadata.yaml"
 editable_metadata = load_dict_from_file(editable_metadata_path)
 metadata = dict_deep_update(metadata, editable_metadata)
+
+# Add some more metadata
+metadata["Subject"]["subject_id"] = subject
 
 # Set conversion options and run conversion
 conversion_options = dict(
