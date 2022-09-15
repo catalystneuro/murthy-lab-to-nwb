@@ -16,6 +16,8 @@ all_subjects_info_path = Path(__file__).parent / "all_subjects_info.yaml"
 all_subjects_info = load_dict_from_file(all_subjects_info_path)
 data_dir_path = Path("/home/heberto/Murthy-data-share/one2one-mapping")
 video_dir_path = data_dir_path / "raw_data" / "courtship_behavior" / "videos"
+audio_dir_path = Path(data_dir_path) / "raw_data" / "courtship_behavior" / "audio"
+
 output_path = Path("/home/heberto/conversion_nwb/nwb/")
 if stub_test:
     output_path = output_path.parent / "nwb_stub"
@@ -30,26 +32,32 @@ experiment = "courtship_behavior"
 example_session_id = f"{experiment}_{lobula_columnar_neuron_cell_line}_{subject}"
 nwbfile_path = output_path / f"{example_session_id}.nwb"
 
+source_data = dict()
 
-# Extract only the number as this is used in the file paths of the videos.
-cell_string = lobula_columnar_neuron_cell_line[2:]
+# Add movie interface (path stem example 161101_10a05.avi)
+cell_string = lobula_columnar_neuron_cell_line[2:]  # Only the number is used in the video file paths.
 fly_number = subject[3:]
 fly_number = fly_number.rjust(2, "0")  # Pad with 0s
 video_string = f"{cell_string}{fly_number}"
 video_file_paths = [path for path in video_dir_path.iterdir() if video_string in path.stem]
-source_data = dict(
-    #Movie=dict(file_paths=video_file_paths),
-    Audio=dict(
-        subject=subject,
-        lobula_columnar_neuron_cell_line=lobula_columnar_neuron_cell_line,
-        data_dir_path=str(data_dir_path),
-        ),
+# source_data.update(Movie=dict(file_paths=video_file_paths))
+
+# Add audio interface (path stem example 161101_10a05bin.mat)
+padded_subject = subject[3:].rjust(2, "0")
+audio_string = f"{lobula_columnar_neuron_cell_line[2:]}{padded_subject}"
+audio_path = next(path for path in audio_dir_path.iterdir() if audio_string in path.stem)
+audio_file_path = audio_dir_path / audio_path
+source_data.update(Audio=dict(file_path=str(audio_file_path)))
+
+# Add Behavior interface
+source_data.update(
     Behavior=dict(
         subject=subject,
         lobula_columnar_neuron_cell_line=lobula_columnar_neuron_cell_line,
         data_dir_path=str(data_dir_path),
-    ),
+    )
 )
+
 
 converter = Cowley2022MappingNWBConverter(source_data=source_data)
 

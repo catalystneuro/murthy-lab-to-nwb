@@ -12,14 +12,9 @@ from ndx_sound import AcousticWaveformSeries
 class Cowley2022MappingAudioInterface(BaseDataInterface):
     """My behavior interface docstring"""
 
-    def __init__(self, subject: str, lobula_columnar_neuron_cell_line: str, data_dir_path: str):
+    def __init__(self, file_path: str):
 
-        audio_dir_path = Path(data_dir_path) / "raw_data" / "courtship_behavior" / "audio"
-        # 161101_10a05bin.mat
-        padded_subject = subject[3:].rjust(2, "0")
-        audio_string = f"{lobula_columnar_neuron_cell_line[2:]}{padded_subject}"
-        audio_path = next(path for path in audio_dir_path.iterdir() if audio_string in path.stem)
-        self.audio_file_path = audio_dir_path / audio_path
+        self.audio_file_path = Path(file_path)
         assert self.audio_file_path.is_file(), "file with audio data not found"
 
     def get_metadata(self):
