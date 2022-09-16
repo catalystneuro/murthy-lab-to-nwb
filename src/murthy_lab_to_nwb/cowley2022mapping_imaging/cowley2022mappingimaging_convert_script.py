@@ -33,7 +33,7 @@ nwbfile_path = output_path / f"{example_session_id}.nwb"
 
 source_data = dict()
 
-# Add Imaging data 
+# Add Imaging data
 # Confirm with authors between sampling 30 (as for the stimuli) vs 50 (as in the paper)
 source_data.update(dict(Imaging=dict(subject=subject, tiff_dir_path=str(tiff_dir_path), sampling_frequency=50)))
 
