@@ -18,8 +18,26 @@ NWBFile:
     - fly
     - behavior
     - deep learning
+    - optical Glomeruli
+    - LC neurons
+    - lobula columnar
 Subject:
   species: Drosophila melanogaster
   age: P4D/P7D
   sex: M
   description: For all experiments, we used 4-7 day old virgin flies harvested from density-controlled bottles seeded with 8 males and 8 females. Fly bottles were kept at 25°C and 60% relative humidity. Virgined flies were then housed individually across all experiments. Female virgined flies were individually housed and kept in behavioral incubators under a 12-12 hr light-dark cycling. Prior to recording with a female, males were painted with a small spot of opaque ultraviolet-cured glue (Norland Optical and Electronic Adhesives) on the dorsal mesothorax to facilitate identification during tracking. Data from CS-blind flies were collected in a previous study [15]. UAS-TNT-C was obtained from the Bloomington stock center. All LC lines and BDP control were generously provided by Michael Reiser.
+Ophys:
+  Device:
+    - name: Two-photon microscope
+      description: We recorded LC responses of a head-fixed male fly using a custom-built two-photon microscope with a 40x objective and a two-photon laser (Coherent) tuned to 920 nm for imaging of GCaMP6f. The laser is from Coherent Labs tuned to 920 nm for imaging of GCaMP6f. A 562 nm dichroic split the emission light into red and green channels, which were then passed through a red 545-604 nm and green 485-555 nm bandpass filter respectively. Data was recorded from the green channel.
+      manufacturer: Custom-built
+  ImagingPlane:
+    - name: ImagingPlane
+      description: Imaging plane on the central brain to record the response of LC neuron types.
+      location: Central Brain, Optical Glomeruli
+      device: Two-photon microscope
+      indicator: GCaMP6f
+      optical_channel:
+        - name: Green
+          emission_lambda: 500.0
+          description: A 562 nm dichroic split the emission light into red and green channels, which were then passed through a red 545-604 nm and green 485- 555 nm bandpass filter respectively The green channel was the one used for recording.
