@@ -30,15 +30,19 @@ lobula_columnar_neuron_cell_line = "LC11"
 experiment = "imaging"
 example_session_id = f"{experiment}_{lobula_columnar_neuron_cell_line}_{subject}"
 nwbfile_path = output_path / f"{example_session_id}.nwb"
+
 source_data = dict()
 
+# Add Imaging data 
 # Confirm with authors between sampling 30 (as for the stimuli) vs 50 (as in the paper)
 source_data.update(dict(Imaging=dict(subject=subject, tiff_dir_path=str(tiff_dir_path), sampling_frequency=50)))
 
+# Add behavior
 responses_file_path = roi_responses_dir_path / f"{lobula_columnar_neuron_cell_line}.pkl"
 source_data.update(dict(Behavior=dict(responses_file_path=str(responses_file_path), subject=subject)))
-source_data.update(dict(Segmentation=dict(responses_file_path=str(responses_file_path), subject=subject)))
 
+# Add single-cell segmentation
+source_data.update(dict(Segmentation=dict(responses_file_path=str(responses_file_path), subject=subject)))
 
 converter = Cowley2022MappingImagingNWBConverter(source_data=source_data)
 
@@ -56,6 +60,9 @@ metadata["NWBFile"]["session_start_time"] = datetime.datetime(
 editable_metadata_path = Path(__file__).parent / "cowley2022mappingimaging_metadata.yaml"
 editable_metadata = load_dict_from_file(editable_metadata_path)
 metadata = dict_deep_update(metadata, editable_metadata)
+
+# Add some more subject metadata
+metadata["Subject"]["subject_id"] = subject
 
 # Set conversion options and run conversion
 conversion_options = dict(
