@@ -56,7 +56,7 @@ source_data.update(Audio=dict(file_path=str(audio_file_path)))
 cell_line_dir_name = f"structs_{lobula_columnar_neuron_cell_line}"
 file_name = f"S_{subject}.mat"
 sound_and_joints_data_path = joint_positions_data_dir / cell_line_dir_name / file_name
-source_data.update(Behavior=dict(file_path=str(sound_and_joints_data_path)))
+source_data.update(Behavior=dict(file_path=str(sound_and_joints_data_path), video_file_path=str(video_file_paths[0])))
 
 # Build the converter
 converter = Cowley2022MappingNWBConverter(source_data=source_data)

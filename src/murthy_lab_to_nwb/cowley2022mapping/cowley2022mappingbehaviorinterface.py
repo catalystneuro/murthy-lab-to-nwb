@@ -14,9 +14,10 @@ from ndx_events import LabeledEvents
 class Cowley2022MappingBehaviorInterface(BaseDataInterface):
     """My behavior interface docstring"""
 
-    def __init__(self, file_path: str):
+    def __init__(self, file_path: str, video_file_path: str):
 
         self.sound_and_joints_data_path = Path(file_path)
+        self.original_video_file_path = Path(video_file_path)
         assert self.sound_and_joints_data_path.is_file(), "joint joints and sound file not found"
 
     def get_metadata(self):
@@ -126,7 +127,7 @@ class Cowley2022MappingBehaviorInterface(BaseDataInterface):
     def build_pose_estimation_container(self, sex, pose_estimation_series_list):
         container_description = f"Pose estimation container for {sex} fly. Courtship experiments."
 
-        video_relative_path = f"./none.avi"
+        video_relative_path = f"./{self.original_video_file_path.name}"
 
         pose_estimation_container = PoseEstimation(
             name=f"sex={sex}",
