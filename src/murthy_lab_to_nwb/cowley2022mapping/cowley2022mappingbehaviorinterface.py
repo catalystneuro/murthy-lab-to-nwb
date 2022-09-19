@@ -5,7 +5,6 @@ import numpy as np
 from scipy.io import loadmat
 import pandas as pd
 
-
 from pynwb.file import NWBFile, ProcessingModule
 from neuroconv.basedatainterface import BaseDataInterface
 from ndx_pose import PoseEstimationSeries, PoseEstimation
@@ -15,13 +14,9 @@ from ndx_events import LabeledEvents
 class Cowley2022MappingBehaviorInterface(BaseDataInterface):
     """My behavior interface docstring"""
 
-    def __init__(self, subject: str, lobula_columnar_neuron_cell_line: str, data_dir_path: str):
+    def __init__(self, file_path: str):
 
-        joint_positions_data_dir = Path(data_dir_path) / "processed_data" / "joint_positions"
-        cell_line_dir_name = f"structs_{lobula_columnar_neuron_cell_line}"
-        file_name = f"S_{subject}.mat"
-
-        self.sound_and_joints_data_path = joint_positions_data_dir / cell_line_dir_name / file_name
+        self.sound_and_joints_data_path = Path(file_path)
         assert self.sound_and_joints_data_path.is_file(), "joint joints and sound file not found"
 
     def get_metadata(self):
@@ -130,16 +125,17 @@ class Cowley2022MappingBehaviorInterface(BaseDataInterface):
 
     def build_pose_estimation_container(self, sex, pose_estimation_series_list):
         container_description = f"Pose estimation container for {sex} fly. Courtship experiments."
+
+        video_relative_path = f"./none.avi"
+
         pose_estimation_container = PoseEstimation(
             name=f"sex={sex}",
             pose_estimation_series=pose_estimation_series_list,
             description=container_description,
-            # original_videos=[f"{video.filename}"],
-            # labeled_videos=[f"{video.filename}"],
+            original_videos=[video_relative_path],
             source_software="SLEAP",
-            nodes=list(self.node_to_data_index.keys())
-            # edges=np.array(skeleton.edge_inds).astype("uint64"),
-            # dimensions=np.array([[video.backend.height, video.backend.width]]),
+            nodes=list(self.node_to_data_index.keys()),
+            dimensions=np.array([[1280, 960]]).astype("uint64"),  # Extracted with ffprobe
         )
 
         return pose_estimation_container

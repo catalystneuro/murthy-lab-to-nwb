@@ -14,9 +14,12 @@ stub_test = True
 # Data directories
 all_subjects_info_path = Path(__file__).parent / "all_subjects_info.yaml"
 all_subjects_info = load_dict_from_file(all_subjects_info_path)
+
 data_dir_path = Path("/home/heberto/Murthy-data-share/one2one-mapping")
 video_dir_path = data_dir_path / "raw_data" / "courtship_behavior" / "videos"
 audio_dir_path = Path(data_dir_path) / "raw_data" / "courtship_behavior" / "audio"
+
+joint_positions_data_dir = Path(data_dir_path) / "processed_data" / "joint_positions"
 
 output_path = Path("/home/heberto/conversion_nwb/nwb/")
 if stub_test:
@@ -50,14 +53,12 @@ audio_file_path = audio_dir_path / audio_path
 source_data.update(Audio=dict(file_path=str(audio_file_path)))
 
 # Add Behavior interface
-source_data.update(
-    Behavior=dict(
-        subject=subject,
-        lobula_columnar_neuron_cell_line=lobula_columnar_neuron_cell_line,
-        data_dir_path=str(data_dir_path),
-    )
-)
+cell_line_dir_name = f"structs_{lobula_columnar_neuron_cell_line}"
+file_name = f"S_{subject}.mat"
+sound_and_joints_data_path = joint_positions_data_dir / cell_line_dir_name / file_name
+source_data.update(Behavior=dict(file_path=str(sound_and_joints_data_path)))
 
+# Build the converter
 converter = Cowley2022MappingNWBConverter(source_data=source_data)
 
 # Session start time (missing time, only the date part)
