@@ -32,6 +32,16 @@ class Cowley2022MappingAudioInterface(BaseDataInterface):
         if stub_test:
             audio_data = audio_data[:100]  # First 100 samples just for testing
 
+        description = (
+            ". Each recording chamber had a floor lined with white plastic mesh and equipped with 16 microphones"
+            "The description of the recording system is referenced to be found on: \n"
+            "1) doi: 10.1186/1741-7007-11-11.\n"
+            "2) doi: 10.1016/j.cub.2018.06.011. Epub 2018 Jul 26."
+        )
+
+        device_dict = dict(name="Microphone", description=description)
+        nwbfile.create_device(**device_dict)
+
         # Create AcousticWaveformSeries with ndx-sound
         acoustic_waveform_series = AcousticWaveformSeries(
             name="audio_waveforms",
