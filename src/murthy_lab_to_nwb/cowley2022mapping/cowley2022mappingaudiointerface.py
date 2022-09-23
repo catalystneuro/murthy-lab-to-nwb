@@ -46,9 +46,8 @@ class Cowley2022MappingAudioInterface(BaseDataInterface):
         acoustic_waveform_series = AcousticWaveformSeries(
             name="audio_waveforms",
             data=audio_data,
-            rate=30.0,  # TODO confirm with authors
+            rate=10.0,
             description="acoustic stimulus",
-            unit="not_clear",  # TODO ask authors
             conversion=conversion,
         )
 

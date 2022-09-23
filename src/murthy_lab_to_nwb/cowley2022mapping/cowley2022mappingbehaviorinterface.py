@@ -133,7 +133,7 @@ class Cowley2022MappingBehaviorInterface(BaseDataInterface):
             name=f"sex={sex}",
             pose_estimation_series=pose_estimation_series_list,
             description=container_description,
-            original_videos=[video_relative_path],
+            original_videos=[video_relative_path.relative(video_relative_path.parent)],
             source_software="SLEAP",
             nodes=list(self.node_to_data_index.keys()),
             dimensions=np.array([[1280, 960]]).astype("uint64"),  # Extracted with ffprobe
