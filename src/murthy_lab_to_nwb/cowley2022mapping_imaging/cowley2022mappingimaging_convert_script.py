@@ -9,7 +9,7 @@ from murthy_lab_to_nwb.cowley2022mapping_imaging import Cowley2022MappingImaging
 from pathlib import Path
 
 # Parameters
-stub_test = True
+stub_test = False
 
 # Data directories
 all_subjects_info_path = Path(__file__).parent / "all_subjects.yaml"
