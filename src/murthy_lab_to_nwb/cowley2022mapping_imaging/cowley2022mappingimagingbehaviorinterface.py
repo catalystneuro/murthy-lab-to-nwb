@@ -51,7 +51,6 @@ class Cowley2022MappingImagingBehaviorInterface(BaseDataInterface):
         for trial_data in subject_data:
 
             stimulus = trial_data["stimulus"]
-            stimulus_name = trial_data.get("stim_name", "")
             timestamps = trial_data["timepts"]
 
             # Real values
@@ -67,18 +66,33 @@ class Cowley2022MappingImagingBehaviorInterface(BaseDataInterface):
             for index, trial_timestamps in enumerate(timestamps):  # One for every trial with that specific stimuli
                 start_time = trial_timestamps[0]
                 stop_time = max(trial_timestamps)  # Some are 0 at the end so [-1] indexing does not work.
+
+                # Add a string to characterize artificial stimuli
+                nivstim_string = ""
+                import math
+                for key, value in real_values_dict.items():
+                    if value != np.nan and not math.isnan(value):
+                        nivstim_string += f"{key}={value}, "
+
+                # Stimuli is either artificial or characterized with its simulation values
+                stimulus_name = trial_data.get("stim_name", nivstim_string)
+
+                # Add basic info
                 data_dict = dict(
-                    start_time=start_time, stop_time=stop_time, stimulus=stimulus, stimulus_name=stimulus_name
+                    start_time=start_time,
+                    stop_time=stop_time,
+                    stimulus=stimulus,
+                    stimulus_name=stimulus_name,
                 )
 
                 # Add real values to row
                 data_dict.update(real_values_dict)
 
                 # Add array values to row
-                real_values_dict_per_sub_trial = {
+                array_values_dict_per_sub_trial = {
                     column: list(data[index, :]) for column, data in array_data_dict.items()
                 }
-                data_dict.update(real_values_dict_per_sub_trial)
+                # data_dict.update(array_values_dict_per_sub_trial)
 
                 trial_dict_list.append(data_dict)
 
@@ -94,8 +108,8 @@ class Cowley2022MappingImagingBehaviorInterface(BaseDataInterface):
         for column in float_columns:
             nwbfile.add_trial_column(name=column, description=column)
 
-        for column in array_columns:
-            nwbfile.add_trial_column(name=column, description=column, index=True)
+        # for column in array_columns:
+        #     nwbfile.add_trial_column(name=column, description=column, index=True)
 
         [nwbfile.add_trial(**row_dict) for row_dict in sorted_trial_dict_list]
 
