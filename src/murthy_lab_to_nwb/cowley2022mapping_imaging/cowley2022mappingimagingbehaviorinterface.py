@@ -70,6 +70,7 @@ class Cowley2022MappingImagingBehaviorInterface(BaseDataInterface):
                 # Add a string to characterize artificial stimuli
                 nivstim_string = ""
                 import math
+
                 for key, value in real_values_dict.items():
                     if value != np.nan and not math.isnan(value):
                         nivstim_string += f"{key}={value}, "
