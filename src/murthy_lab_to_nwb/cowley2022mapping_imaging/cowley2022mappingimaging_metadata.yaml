@@ -1,0 +1,43 @@
+NWBFile:
+  related_publications:
+    https://doi.org/10.1101/2022.07.18.500505
+  session_description:
+    The rich variety of behaviors observed in animals arises through the complex interplay between sensory processing and motor control [1, 2, 3, 4, 5]. To understand these sensorimotor transformations, it is useful to build models that predict not only neural responses to sensory input [6, 7, 8, 9, 10] but also how each neuron causally contributes to behavior [11, 12]. Here we demonstrate a novel modeling approach to identify a one-to-one mapping between internal units in a deep neural network and real neurons by predicting the behavioral changes arising from systematic perturbations of more than a dozen neuron types. A key ingredient we introduce is “knockout training”, which involves perturbing the network during training to match the perturbations of the real neurons during behavioral experiments. We apply this approach to model the sensorimotor transformation of Drosophila melanogaster males during a complex, visually-guided social behavior [13, 14, 15, 16]. Contrary to prevailing views [17, 18, 19], our model suggests that visual projection neurons at the interface between the eye and brain form a distributed population code that collectively sculpts social behavior. Overall, our framework consolidates behavioral effects elicited from various neural perturbations into a single, unified model, providing a detailed map from stimulus to neuron to behavior.
+  experiment_description:
+    Imaging experiments to match lobular columnar (LC) cells with neural network units dynamics.
+  institution: Princenton
+  lab: Murthy
+  experimenter:
+    - Cowley, Benjamin R.
+    - Calhoun, Adam J.
+    - Rangarajan, Nivedita
+    - Pillow, Jonathan W
+    - Murthy, Mala
+  keywords:
+    - optical phisiology
+    - fly
+    - behavior
+    - deep learning
+    - optical Glomeruli
+    - LC neurons
+    - lobula columnar
+Subject:
+  species: Drosophila melanogaster
+  age: P4D/P7D
+  sex: M
+  description: For all experiments, we used 4-7 day old virgin flies harvested from density-controlled bottles seeded with 8 males and 8 females. Fly bottles were kept at 25°C and 60% relative humidity. Virgined flies were then housed individually across all experiments. Female virgined flies were individually housed and kept in behavioral incubators under a 12-12 hr light-dark cycling. Prior to recording with a female, males were painted with a small spot of opaque ultraviolet-cured glue (Norland Optical and Electronic Adhesives) on the dorsal mesothorax to facilitate identification during tracking. Data from CS-blind flies were collected in a previous study [15]. UAS-TNT-C was obtained from the Bloomington stock center. All LC lines and BDP control were generously provided by Michael Reiser.
+Ophys:
+  Device:
+    - name: Microscope
+      description: We recorded LC responses of a head-fixed male fly using a custom-built two-photon microscope with a 40x objective and a two-photon laser (Coherent) tuned to 920 nm for imaging of GCaMP6f. The laser is from Coherent Labs tuned to 920 nm for imaging of GCaMP6f. A 562 nm dichroic split the emission light into red and green channels, which were then passed through a red 545-604 nm and green 485-555 nm bandpass filter respectively. Data was recorded from the green channel.
+      manufacturer: Custom-built
+  ImagingPlane:
+    - name: ImagingPlane
+      description: Imaging plane on the central brain to record the response of LC neuron types.
+      location: Central Brain, Optical Glomeruli
+      device: Microscope
+      indicator: GCaMP6f
+      optical_channel:
+        - name: Green
+          emission_lambda: 500.0
+          description: A 562 nm dichroic split the emission light into red and green channels, which were then passed through a red 545-604 nm and green 485- 555 nm bandpass filter respectively The green channel was the one used for recording.
