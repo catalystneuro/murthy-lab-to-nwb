@@ -11,7 +11,6 @@ from ndx_pose import PoseEstimationSeries, PoseEstimation
 from ndx_events import LabeledEvents
 
 
-
 class Cowley2022MappingBehaviorInterface(BaseDataInterface):
     """My behavior interface docstring"""
 
