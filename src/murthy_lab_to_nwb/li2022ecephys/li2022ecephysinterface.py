@@ -36,7 +36,7 @@ class Li2022EcephysInterface(BaseRecordingExtractorInterface):
         gains = 1.0 / header["AIChannelScales"][()]
         self.recording_extractor.set_channel_gains(gains)
         self.recording_extractor.set_channel_offsets(offsets=0)
-        self.recording_extractor.set_property(key="channel_units", values=channel_units.astype('str'))
+        self.recording_extractor.set_property(key="channel_units", values=channel_units.astype("str"))
 
     def get_conversion_options(self):
         conversion_options = dict(write_as="processed", es_key="ElectricalSeriesProcessed", stub_test=False)

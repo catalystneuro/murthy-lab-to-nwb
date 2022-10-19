@@ -8,7 +8,7 @@ NWBFile:
   institution: Princenton
   lab: Murthy
   experimenter:
-    - Li, Xinping 
+    - Li, Xinping
   keywords:
     - keyword1
     - keyword2
@@ -17,4 +17,4 @@ Subject:
   species: TBD
   age: TBD
   sex: TBD
-  
+
