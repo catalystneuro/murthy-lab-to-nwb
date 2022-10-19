@@ -1,0 +1,20 @@
+NWBFile:
+  related_publications:
+    TBD
+  session_description:
+    TBD
+  experiment_description:
+    TBD
+  institution: Princenton
+  lab: Murthy
+  experimenter:
+    - Li, Xinping 
+  keywords:
+    - keyword1
+    - keyword2
+    - keyword3
+Subject:
+  species: TBD
+  age: TBD
+  sex: TBD
+  
