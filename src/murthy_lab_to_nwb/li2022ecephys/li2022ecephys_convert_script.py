@@ -11,7 +11,7 @@ output_path = Path("/home/heberto/conversion_nwb/nwb/")
 stub_test = False
 if stub_test:
     output_path = output_path.parent / "nwb_stub"
-    
+
 
 source_data = dict()
 
@@ -27,7 +27,7 @@ converter = Li2022EcephysNWBConverter(source_data=source_data)
 metadata = converter.get_metadata()
 
 tzinfo = ZoneInfo("US/Eastern")
-date = datetime.datetime.today()  # TO-DO: GEet this from author
+date = datetime.datetime.today()  # TO-DO: Get this from author
 metadata["NWBFile"]["session_start_time"] = date
 
 # Update default metadata with the metadata from the editable yaml file in this directory
