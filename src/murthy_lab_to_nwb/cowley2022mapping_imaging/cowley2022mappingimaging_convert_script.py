@@ -8,13 +8,14 @@ from murthy_lab_to_nwb.cowley2022mapping_imaging import Cowley2022MappingImaging
 from pathlib import Path
 
 # Parameters
-stub_test = False
+stub_test = True
 
 # Data directories
 all_subjects_info_path = Path(__file__).parent / "all_subjects.yaml"
 data_dir_path = Path("/home/heberto/Murthy-data-share/one2one-mapping")
 tiff_dir_path = data_dir_path / "raw_data" / "calcium_imaging" / "example_tiffs"
 roi_responses_dir_path = data_dir_path / "processed_data" / "LC_responses_dFf" / "responses"
+imaging_stimuli_dir_path = data_dir_path / "processed_data" / "LC_responses_dFf" / "stimuli" / "images"
 
 output_path = Path("/home/heberto/conversion_nwb/nwb/")
 if stub_test:
@@ -33,7 +34,7 @@ nwbfile_path = output_path / f"{example_session_id}.nwb"
 source_data = dict()
 
 # Add Imaging data
-source_data.update(dict(Imaging=dict(subject=subject, tiff_dir_path=str(tiff_dir_path), sampling_frequency=50)))
+#source_data.update(dict(Imaging=dict(subject=subject, tiff_dir_path=str(tiff_dir_path), sampling_frequency=50)))
 
 # Add behavior
 responses_file_path = roi_responses_dir_path / f"{lobula_columnar_neuron_cell_line}.pkl"
@@ -42,6 +43,11 @@ source_data.update(dict(Behavior=dict(responses_file_path=str(responses_file_pat
 # Add single-cell segmentation
 source_data.update(dict(Segmentation=dict(responses_file_path=str(responses_file_path), subject=subject)))
 
+
+# Add stimuli
+source_data.update(dict(Stimuli=dict(stimuli_folder_path=str(imaging_stimuli_dir_path))))
+
+# Gather them all in a converter
 converter = Cowley2022MappingImagingNWBConverter(source_data=source_data)
 
 # Session start time (missing time, only including the date part)

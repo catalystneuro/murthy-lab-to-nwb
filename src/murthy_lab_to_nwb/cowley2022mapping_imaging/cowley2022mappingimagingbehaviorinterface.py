@@ -11,7 +11,7 @@ from neuroconv.basedatainterface import BaseDataInterface
 
 
 class Cowley2022MappingImagingBehaviorInterface(BaseDataInterface):
-    """My behavior interface docstring"""
+    """Behavior interface conversion"""
 
     def __init__(self, responses_file_path: str, subject: str):
         # Point to data
@@ -33,50 +33,34 @@ class Cowley2022MappingImagingBehaviorInterface(BaseDataInterface):
         subject_data = [data for data in pickled_data if data["file_id"] == self.subject]
 
         # Get the data types of the data
-        all_types = dict()
+        type_to_columns = dict()
         for trial_data in subject_data:
             for key, value in trial_data.items():
                 value_type = type(value)
-                if value_type not in all_types:
-                    all_types[value_type] = set()
+                if value_type not in type_to_columns:
+                    type_to_columns[value_type] = set()
 
-                all_types[value_type].add(key)
+                type_to_columns[value_type].add(key)
 
-        float_columns = all_types[np.float32]
+        float_columns = type_to_columns[np.float32]
         excluded_array = ["ca_trace", "timepts"]  # Already in the nwb-file
-        array_columns = [column for column in all_types[np.ndarray] if column not in excluded_array]
+        array_columns = [column for column in type_to_columns[np.ndarray] if column not in excluded_array]
 
         # Add trials
         trial_dict_list = []
         for trial_data in subject_data:
 
+            real_values_dict = {column: trial_data.get(column, np.nan) for column in float_columns}
+            array_values_dict = {column: trial_data.get(column, None) for column in array_columns}
+
             stimulus = trial_data["stimulus"]
             timestamps = trial_data["timepts"]
-
-            # Real values
-            real_values_dict = dict()
-            for column in float_columns:
-                real_values_dict[column] = trial_data.get(column, np.nan)
-
-            # Array values
-            array_data_dict = dict()
-            for column in array_columns:
-                array_data_dict[column] = trial_data.get(column, None)
-
             for index, trial_timestamps in enumerate(timestamps):  # One for every trial with that specific stimuli
                 start_time = trial_timestamps[0]
                 stop_time = max(trial_timestamps)  # Some are 0 at the end so [-1] indexing does not work.
 
-                # Add a string to characterize artificial stimuli
-                nivstim_string = ""
-                import math
-
-                for key, value in real_values_dict.items():
-                    if value != np.nan and not math.isnan(value):
-                        nivstim_string += f"{key}={value}, "
-
                 # Stimuli is either artificial or characterized with its simulation values
-                stimulus_name = trial_data.get("stim_name", nivstim_string)
+                stimulus_name = trial_data.get("stim_name", "None")
 
                 # Add basic info
                 data_dict = dict(
@@ -91,9 +75,9 @@ class Cowley2022MappingImagingBehaviorInterface(BaseDataInterface):
 
                 # Add array values to row
                 array_values_dict_per_sub_trial = {
-                    column: list(data[index, :]) for column, data in array_data_dict.items()
+                    column: list(data[index, :]) for column, data in array_values_dict.items()
                 }
-                # data_dict.update(array_values_dict_per_sub_trial)
+                data_dict.update(array_values_dict_per_sub_trial)
 
                 trial_dict_list.append(data_dict)
 
@@ -109,8 +93,8 @@ class Cowley2022MappingImagingBehaviorInterface(BaseDataInterface):
         for column in float_columns:
             nwbfile.add_trial_column(name=column, description=column)
 
-        # for column in array_columns:
-        #     nwbfile.add_trial_column(name=column, description=column, index=True)
+        for column in array_columns:
+            nwbfile.add_trial_column(name=column, description=column, index=True)
 
         [nwbfile.add_trial(**row_dict) for row_dict in sorted_trial_dict_list]
 
