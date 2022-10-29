@@ -20,7 +20,6 @@ class Cowley2022MappingImagingStimuliInterface(BaseDataInterface):
 
         self.stimuli_folder_path = Path(stimuli_folder_path)
         assert self.stimuli_folder_path.is_dir(), f"{self.stimuli_folder_path} not a directory/folder"
-        
 
     def get_metadata(self):
         # Automatically retrieve as much metadata as possible
@@ -29,7 +28,7 @@ class Cowley2022MappingImagingStimuliInterface(BaseDataInterface):
 
     def run_conversion(self, nwbfile: NWBFile, metadata: dict):
         # All the custom code to write through PyNWB
-        
+
         for zip_file_path in self.stimuli_folder_path.iterdir():
             if not is_zipfile(zip_file_path):
                 warning_string = f"file {zip_file_path.name} is not zip, skipping it"

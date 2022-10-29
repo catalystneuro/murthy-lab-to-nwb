@@ -110,14 +110,14 @@ class Cowley2022MappingBehaviorInterface(BaseDataInterface):
 
             node_trajectory = self.joints_data[self.node_to_data_index[node], :, self.sex_to_data_index[sex], :]
             node_trajectory = node_trajectory.repeat(2, axis=0)  # Increase frequency to video frequency
-            
+
             scaling_factor = 25.0  # Slack exchange
             confidence = np.ones(node_trajectory.shape[0]) * np.nan  # TO-DO
             pose_estimation_series_list.append(
                 PoseEstimationSeries(
                     name=f"{node}",
                     description=f"Sequential trajectory of {node}.",
-                    data=node_trajectory * scaling_factor, # Scale of given the author
+                    data=node_trajectory * scaling_factor,  # Scale of given the author
                     confidence=confidence,
                     unit="pixels",
                     reference_frame="No reference.",
