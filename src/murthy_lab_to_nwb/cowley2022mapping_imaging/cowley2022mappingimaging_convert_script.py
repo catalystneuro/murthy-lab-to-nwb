@@ -34,7 +34,7 @@ nwbfile_path = output_path / f"{example_session_id}.nwb"
 source_data = dict()
 
 # Add Imaging data
-#source_data.update(dict(Imaging=dict(subject=subject, tiff_dir_path=str(tiff_dir_path), sampling_frequency=50)))
+# source_data.update(dict(Imaging=dict(subject=subject, tiff_dir_path=str(tiff_dir_path), sampling_frequency=50)))
 
 # Add behavior
 responses_file_path = roi_responses_dir_path / f"{lobula_columnar_neuron_cell_line}.pkl"
