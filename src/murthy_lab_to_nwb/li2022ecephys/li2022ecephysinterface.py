@@ -19,9 +19,20 @@ class Li2022EcephysRecordingSegment(BaseRecordingSegment):
     def get_num_samples(self):
         return self._traces.shape[1]
 
+    def get_num_channels(self):
+        return self._traces.shape[0]
+
     def get_traces(self, start_frame, end_frame, channel_indices):
         # Traces are channels wavesurfer format is channels x time
-        traces = self._traces[:, start_frame:end_frame].T
+        traces = self._traces[:, start_frame:end_frame]
+
+        # Scaling traces, see the notes on:
+        # https://wavesurfer.janelia.org/manual-0.945/index.html#reading-acquired-data
+        scaled_traces = np.empty(traces.shape)
+        for i in range(0, self.get_num_channels()):
+            scaled_traces[i, :] = np.polyval(np.flipud(self.analog_scaling_coefficients[i, :]), traces[i, :])
+
+        traces = scaled_traces.T
         if channel_indices is not None:
             traces = traces[:, channel_indices]
 
@@ -64,8 +75,12 @@ class Li2022EcephysRecording(BaseRecording):
 
         sampling_frequency = float(self.header["AcquisitionSampleRate"][0, 0])
 
+        # Dtype
         dtype = traces_list[0].dtype
         assert all(dtype == ts.dtype for ts in traces_list)
+
+        # Polyonomial scaling
+        self.analog_scaling_coefficients = self.header["AIScalingCoefficients"]
 
         BaseRecording.__init__(self, sampling_frequency, channel_ids, dtype)
         self.is_dumpable = False
@@ -76,6 +91,7 @@ class Li2022EcephysRecording(BaseRecording):
             else:
                 t_start = t_starts[i]
             rec_segment = Li2022EcephysRecordingSegment(traces, sampling_frequency, t_start)
+            rec_segment.analog_scaling_coefficients = self.analog_scaling_coefficients
             self.add_recording_segment(rec_segment)
 
         gains = 1.0 / self.header["AIChannelScales"][()].flatten()
