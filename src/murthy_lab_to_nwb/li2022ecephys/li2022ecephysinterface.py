@@ -118,7 +118,5 @@ class Li2022EcephysInterface(BaseRecordingExtractorInterface):
     #     return metadata
 
     def get_conversion_options(self):
-        conversion_options = dict(
-            write_as="processed", es_key="ElectricalSeriesProcessed", iterator_type="v2", stub_test=False
-        )
+        conversion_options = dict(write_as="processed", iterator_type="v2", stub_test=False)
         return conversion_options
