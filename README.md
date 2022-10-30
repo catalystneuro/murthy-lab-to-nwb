@@ -84,4 +84,3 @@ You might need to install first some conversion specific dependencies that are l
 ```
 pip install -r src/murthy_lab_to_nwb/cowley2022mapping/cowley2022mapping_requirements.txt
 ```
-

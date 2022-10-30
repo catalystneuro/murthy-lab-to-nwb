@@ -32,9 +32,7 @@ def lily_session_to_nwb(file_path, output_path, stub_test=False):
     year = 2020
     month = 1
     day = 1
-    datetime.datetime(
-        year=year, month=month, day=day, tzinfo=tzinfo
-    )
+    datetime.datetime(year=year, month=month, day=day, tzinfo=tzinfo)
     date = datetime.datetime.today()  # TO-DO: Get this from author
     metadata["NWBFile"]["session_start_time"] = date
 

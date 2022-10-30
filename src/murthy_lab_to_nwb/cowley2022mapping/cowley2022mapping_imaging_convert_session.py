@@ -77,7 +77,7 @@ def imaging_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path, s
 
 
 if __name__ == "__main__":
-    
+
     # Parameters for conversion
     stub_test = False
     data_dir_path = Path("/home/heberto/Murthy-data-share/one2one-mapping")

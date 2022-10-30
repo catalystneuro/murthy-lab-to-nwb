@@ -7,6 +7,7 @@ from neuroconv.utils import load_dict_from_file, dict_deep_update
 from murthy_lab_to_nwb.cowley2022mapping import Cowley2022MappingCourtshipNWBConverter
 from pathlib import Path
 
+
 def courtship_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path, stub_test=False):
 
     data_dir_path = Path(data_dir_path)
