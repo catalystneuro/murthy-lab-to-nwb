@@ -27,4 +27,4 @@ jobs:
     - name: Test module load
       uses: jannekem/run-python-script-action@v1
       with:
-        script: import fee_lab_to_nwb
+        script: import murthy_lab_to_nwb
