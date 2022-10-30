@@ -59,7 +59,7 @@ metadata["NWBFile"]["session_start_time"] = datetime.datetime(
 
 # Update default metadata with the metadata from the editable yaml file in this directory
 editable_metadata_dir = Path(__file__).parent / "metadata"
-editable_metadata_path = editable_metadata_dir/ "cowley2022mapping_imaging_metadata.yaml"
+editable_metadata_path = editable_metadata_dir / "cowley2022mapping_imaging_metadata.yaml"
 editable_metadata = load_dict_from_file(editable_metadata_path)
 metadata = dict_deep_update(metadata, editable_metadata)
 
