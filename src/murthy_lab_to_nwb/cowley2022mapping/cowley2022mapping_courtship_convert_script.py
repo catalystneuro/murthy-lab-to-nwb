@@ -2,19 +2,15 @@
 import datetime
 from zoneinfo import ZoneInfo
 
-
 from neuroconv.utils import load_dict_from_file, dict_deep_update
 
-from murthy_lab_to_nwb.cowley2022mapping import Cowley2022MappingNWBConverter
+from murthy_lab_to_nwb.cowley2022mapping import Cowley2022MappingCourtshipNWBConverter
 from pathlib import Path
 
 # Parameters
-stub_test = False
+stub_test = True
 
 # Data directories
-all_subjects_info_path = Path(__file__).parent / "all_subjects_info.yaml"
-all_subjects_info = load_dict_from_file(all_subjects_info_path)
-
 data_dir_path = Path("/home/heberto/Murthy-data-share/one2one-mapping")
 video_dir_path = data_dir_path / "raw_data" / "courtship_behavior" / "videos"
 audio_dir_path = Path(data_dir_path) / "raw_data" / "courtship_behavior" / "audio"
@@ -55,7 +51,7 @@ sound_and_joints_data_path = joint_positions_data_dir / cell_line / file_name
 source_data.update(Behavior=dict(file_path=str(sound_and_joints_data_path), video_file_path=str(video_file_paths[0])))
 
 # Build the converter
-converter = Cowley2022MappingNWBConverter(source_data=source_data)
+converter = Cowley2022MappingCourtshipNWBConverter(source_data=source_data)
 
 # Session start time (missing time, only the date part)
 metadata = converter.get_metadata()
@@ -76,7 +72,8 @@ metadata["NWBFile"]["session_start_time"] = datetime.datetime(
 )
 
 # Update default metadata with the one in the editable yaml file in this directory
-editable_metadata_path = Path(__file__).parent / "cowley2022mapping_metadata.yaml"
+editable_metadata_dir = Path(__file__).parent / "metadata"
+editable_metadata_path = editable_metadata_dir / "cowley2022mapping_courtship_metadata.yaml"
 editable_metadata = load_dict_from_file(editable_metadata_path)
 metadata = dict_deep_update(metadata, editable_metadata)
 

@@ -11,7 +11,7 @@ from ndx_pose import PoseEstimationSeries, PoseEstimation
 from ndx_events import LabeledEvents
 
 
-class Cowley2022MappingBehaviorInterface(BaseDataInterface):
+class Cowley2022MappingCourtshipBehaviorInterface(BaseDataInterface):
     """My behavior interface docstring"""
 
     def __init__(self, file_path: str, video_file_path: str):
