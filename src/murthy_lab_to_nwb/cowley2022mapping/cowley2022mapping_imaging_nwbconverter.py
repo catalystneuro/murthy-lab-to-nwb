@@ -2,9 +2,9 @@
 
 from neuroconv import NWBConverter
 
-from murthy_lab_to_nwb.cowley2022mapping_imaging import (
-    Cowley2022MappingImagingMultipleInterface,
+from .interfaces import (
     Cowley2022MappingImagingBehaviorInterface,
+    Cowley2022MappingImagingMultipleInterface,
     Colwey2022MappingSegmentationInterface,
     Cowley2022MappingImagingStimuliInterface,
 )

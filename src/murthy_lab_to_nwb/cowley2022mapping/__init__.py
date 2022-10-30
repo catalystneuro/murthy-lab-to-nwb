@@ -1,2 +1,2 @@
-from .cowley2022mappingbehaviorinterface import Cowley2022MappingBehaviorInterface
-from .cowley2022mappingnwbconverter import Cowley2022MappingNWBConverter
+from .cowley2022mapping_courtship_nwbconverter import Cowley2022MappingCourtshipNWBConverter
+from .cowley2022mapping_imaging_nwbconverter import Cowley2022MappingImagingNWBConverter

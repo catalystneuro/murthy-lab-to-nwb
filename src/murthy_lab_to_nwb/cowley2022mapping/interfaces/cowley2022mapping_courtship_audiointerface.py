@@ -9,7 +9,7 @@ from neuroconv.basedatainterface import BaseDataInterface
 from ndx_sound import AcousticWaveformSeries
 
 
-class Cowley2022MappingAudioInterface(BaseDataInterface):
+class Cowley2022MappingCourtshipAudioInterface(BaseDataInterface):
     """My behavior interface docstring"""
 
     def __init__(self, file_path: str):
