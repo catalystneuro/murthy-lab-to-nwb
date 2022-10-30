@@ -35,39 +35,53 @@ Each conversion is organized in a directory of its own in the `src` directory:
     ├── requirements.txt
     ├── setup.py
     └── src
-        ├── murthy_lab_to_nwb
-        │   ├── conversion_directory_1
-        │   └── cowley2022mapping`
-        │       ├── cowley2022mappingbehaviorinterface.py
-        │       ├── cowley2022mapping_convert_script.py
-        │       ├── cowley2022mapping_metadata.yml
-        │       ├── cowley2022mappingnwbconverter.py
-        │       ├── cowley2022mapping_requirements.txt
-        │       ├── cowley2022mapping_notes.md
-
-        │       └── __init__.py
-        │   ├── conversion_directory_b
-
-        └── __init__.py
+        ├── __init__.py
+        └── murthy_lab_to_nwb
+            ├── __init__.py
+            ├── cowley2022mapping
+            │   ├── cowley2022mapping_courtship_convert_session.py
+            │   ├── cowley2022mapping_imaging_convert_session.py
+            │   ├── cowley2022mapping_nwbconverter.py
+            │   ├── cowley2022mapping_requirements.txt
+            │   ├── __init__.py
+            │   ├── interfaces
+            │   ├── metadata
+            │   ├── utils
+            │   ├── widget_demostration_courtship.ipynb
+            │   └── widget_demostration_imaging.ipynb
+            └── li2022ecephys
+                ├── __init__.py
+                ├── li2022ecephys_convert_session.py
+                ├── li2022ecephysinterface.py
+                ├── li2022ecephysnwbconverter.py
+                └── li2022ecephys.yaml_.py
+                └── __init__.py
 
  For example, for the conversion `cowley2022mapping` you can find a directory located in `src/murthy-lab-to-nwb/cowley2022mapping`. Inside each conversion directory you can find the following files:
 
-* `cowley2022mapping_convert_script.py`: this is the cemtral script that you must run in order to perform the full conversion.
+* `cowley2022mapping_courtship_convert_session.py`: this runs a nwb conversion for a courtship session.
+* `cowley2022mapping_imaging_convert_session.py`: this runs a nwb conversion for an imaging session.
 * `cowley2022mapping_requirements.txt`: dependencies specific to this conversion specifically.
-* `cowley2022mapping_metadata.yml`: metadata in yaml format for this specific conversion.
-* `cowley2022mappingbehaviorinterface.py`: the behavior interface. Usually ad-hoc for each conversion.
-* `cowley2022mappingnwbconverter.py`: the place where the `NWBConverter` class is defined.
-* `cowley2022mapping_notes.md`: notes and comments concerning this specific conversion.
+* `widget_demostration_courtship.ipynb`  jupyter notebook with visulization tools for the courtship nwb file
+* `widget_demostration_imaging.ipynb`  jupyter notebook with visulization tools for the imaging nwb file
 
-The directory might contain other files that are necessary for the conversion but those are the central ones.
+Plus the following directories:
+* `interfaces` directory which holds the interfaces required in this conversion.
+* `metadata` directory which holds the editable yaml metadata files to add extra metadata to the conversions.
+* `utils` miscellaneous utilities for the conversion.
+
 
 ## Running a specific conversion
-To run a specific conversion, you might need to install first some conversion specific dependencies that are located in each conversion directory:
+To run a specific conversion for a full session you can see here the following examples
+
+```
+python src/murthy_lab_to_nwb/cowley2022mapping/cowley2022mapping_courtship_convert_session.py
+python src/murthy_lab_to_nwb/cowley2022mapping/cowley2022mapping_imaging_convert_session.py
+python src/murthy_lab_to_nwb/li2022ecephys/li2022ecephys_convert_session.py
+```
+
+You might need to install first some conversion specific dependencies that are located in each conversion directory:
 ```
 pip install -r src/murthy_lab_to_nwb/cowley2022mapping/cowley2022mapping_requirements.txt
 ```
 
-You can run a specific conversion with the following command:
-```
-python src/murthy_lab_to_nwb/cowley2022mapping/cowley2022mapping_conversion_script.py
-```

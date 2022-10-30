@@ -38,7 +38,6 @@ class Li2022EcephysRecordingSegment(BaseRecordingSegment):
 
         return traces
 
-
 class Li2022EcephysRecording(BaseRecording):
     """
 
