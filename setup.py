@@ -1,22 +1,22 @@
 # -*- coding: utf-8 -*-
+from pathlib import Path
 from setuptools import setup, find_packages
-import os
 
-here = os.path.abspath(os.path.dirname(__file__))
-with open(os.path.join(here, "requirements.txt")) as f:
-    install_requires = f.read().strip().split("\n")
-
+requirements_file_path = Path(__file__).parent / "requirements.txt"
+with open(requirements_file_path) as file:
+    install_requires = file.readlines()
+    
 with open("README.md", "r") as f:
     long_description = f.read()
 
 setup(
     name="murthy-lab-to-nwb",
     version="0.0.1",
-    description="NWB conversion scripts, functions, and classes for an arbitrary conversion repo_name.",
+    description="NWB conversion scripts, functions, and classes for the nwb conversion of Murthy lab",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="CatalystNeuro",
-    email="ben.dichter@catalystneuro.com",
+    author_email="ben.dichter@catalystneuro.com",
     url="https://github.com/catalystneuro/murthy-lab-to-nwb",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
