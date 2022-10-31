@@ -10,6 +10,7 @@ from PIL import Image
 from natsort import natsorted
 from pynwb.file import NWBFile
 from pynwb.image import ImageSeries
+from hdmf.backends.hdf5.h5_utils import H5DataIO
 import numpy as np
 
 from neuroconv.basedatainterface import BaseDataInterface
@@ -52,6 +53,7 @@ class Cowley2022MappingImagingStimuliInterface(BaseDataInterface):
         name = zip_file_path.stem
         rate = 60.0  # Hz
         unit = "values between 0 and 255"
-        image_series = ImageSeries(name=name, description=name, data=image_data, rate=rate, unit=unit)
+        wrapped_data = H5DataIO(image_data)
+        image_series = ImageSeries(name=name, description=name, data=wrapped_data, rate=rate, unit=unit)
 
         return image_series
