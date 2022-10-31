@@ -214,8 +214,7 @@ def build_faceting_figure(df, facet_col, facet_row, data_label="data"):
 
 
 class TrializedTimeSeries(widgets.HBox):
-        
-    def __init__(self, time_series: TimeSeries, trials_table: DynamicTable=None):
+    def __init__(self, time_series: TimeSeries, trials_table: DynamicTable = None):
         super().__init__()
 
         self.time_series = time_series
@@ -223,26 +222,25 @@ class TrializedTimeSeries(widgets.HBox):
         self.trials_table = trials_table
         if self.trials_table is None:
             self.trials_table = time_series.get_ancestor("NWBFile").trials
-                    
+
         self.trials_table_df = self.trials_table.to_dataframe()
-        
+
         # Labels to refer to data created by the widget. Should not collapse with the column names on the dynamic table
         self.data_label = "data_widget"
         self.trial_label = "trial_widget"
         self.timestamps_label = "timestamps"
         self.centered_timestamps_label = "centered_timestamps"
-        
-        self.available_columns = self.trials_table_df.columns 
 
-        
+        self.available_columns = self.trials_table_df.columns
+
         invalid_columns = ["start_time", "stop_time"]
         invalid_columns += [self.data_label, self.trial_label, self.timestamps_label, self.centered_timestamps_label]
         get_indexed_column_name = lambda col: "_".join(col.name.split("_")[:-1])
         ragged_columns = [get_indexed_column_name(col) for col in self.trials_table.columns if "index" in col.name]
         invalid_columns += ragged_columns
-        
+
         self.invalid_columns = invalid_columns
-        
+
         self.columns_for_filtering = [
             column for column in self.trials_table_df.columns if column not in self.invalid_columns
         ]
@@ -268,9 +266,7 @@ class TrializedTimeSeries(widgets.HBox):
         self.faceting_row_selection = widgets.Dropdown(options=self.columns_for_filtering, description="row faceting")
 
         dimension_options = list(range(self.data_dimensions))
-        self.data_column_selection = widgets.Dropdown(
-            options=dimension_options, description="Data dim", value=0
-        )
+        self.data_column_selection = widgets.Dropdown(options=dimension_options, description="Data dim", value=0)
 
         self.plot_button = widgets.Button(description="Plot selection!")
 
@@ -324,7 +320,6 @@ class TrializedTimeSeries(widgets.HBox):
             return f" {children.description} == '{children.value}' "
         else:
             return f" {children.description} == {children.value} "
-
 
     def update_plot_widget(self, button_instance):
 

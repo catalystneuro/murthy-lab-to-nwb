@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 requirements_file_path = Path(__file__).parent / "requirements.txt"
 with open(requirements_file_path) as file:
     install_requires = file.readlines()
-    
+
 with open("README.md", "r") as f:
     long_description = f.read()
 
