@@ -51,7 +51,7 @@ class Cowley2022MappingCourtshipStimuliInterface(BaseDataInterface):
 
         name = "reconstructed_stimuli"
         description = "artificial reconstructed stimuli as seen by the male fly"
-        rate = 30.0  # Hz
+        rate = 30.0  # Hz  (makes for reconstructed stimuli of approximately 30 minutes, as the movie)
         unit = "values between 0 and 255"
         wrapped_data = H5DataIO(data=image_data, compression="gzip", compression_opts=6)
         image_series = ImageSeries(name=name, description=description, data=wrapped_data, rate=rate, unit=unit)
