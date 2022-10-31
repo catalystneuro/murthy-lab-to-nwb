@@ -6,17 +6,17 @@ from murthy_lab_to_nwb.li2022ecephys import Li2022EcephysNWBConverter
 from neuroconv.utils import load_dict_from_file, dict_deep_update
 
 
-def lily_session_to_nwb(file_path, output_path, stub_test=False):
+def lily_session_to_nwb(file_path, output_dir_path, stub_test=False):
 
     file_path = Path(file_path)
     assert file_path.exists(), f"file path {file_path} does not exists"
-    output_path = Path(output_path)
+    output_dir_path = Path(output_dir_path)
     if stub_test:
-        output_path = output_path / "nwb_stub"
-    output_path.mkdir(parents=True, exist_ok=True)
+        output_dir_path = output_dir_path / "nwb_stub"
+    output_dir_path.mkdir(parents=True, exist_ok=True)
 
     session_id = f"ecephys_{file_path.stem}"
-    nwbfile_path = output_path / f"{session_id}.nwb"
+    nwbfile_path = output_dir_path / f"{session_id}.nwb"
 
     source_data = dict()
 
@@ -59,11 +59,11 @@ if __name__ == "__main__":
     # Parameters for conversion
     stub_test = False
     data_dir_path = Path("/home/heberto/Murthy-data-share/")
-    output_path = Path("/home/heberto/conversion_nwb/")
+    output_dir_path = Path("/home/heberto/conversion_nwb/")
     file_path = data_dir_path / "ephys_demo_0007-0008.h5"
 
     lily_session_to_nwb(
         file_path=file_path,
-        output_path=output_path,
+        output_dir_path=output_dir_path,
         stub_test=stub_test,
     )

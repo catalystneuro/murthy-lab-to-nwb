@@ -76,8 +76,7 @@ class Li2022EcephysRecording(BaseRecording):
         sampling_frequency = float(self.header["AcquisitionSampleRate"][0, 0])
 
         # Dtype
-        dtype = traces_list[0].dtype
-        assert all(dtype == ts.dtype for ts in traces_list)
+        dtype = "float"
 
         # Polyonomial scaling
         self.analog_scaling_coefficients = self.header["AIScalingCoefficients"]
@@ -94,7 +93,7 @@ class Li2022EcephysRecording(BaseRecording):
             rec_segment.analog_scaling_coefficients = self.analog_scaling_coefficients
             self.add_recording_segment(rec_segment)
 
-        gains = 1.0 / self.header["AIChannelScales"][()].flatten()
+        gains = 1e6 / self.header["AIChannelScales"][()].flatten()  # Transform to micro-volts
         self.set_channel_gains(gains)
         self.set_channel_offsets(offsets=0)
 
