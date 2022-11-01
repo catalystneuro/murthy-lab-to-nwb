@@ -9,6 +9,8 @@ NWBFile:
   lab: Murthy Lab
   experimenter:
     - Li, Xinping
+    - Some cool collaborator
+    - Another cool collaborator
   keywords:
     - keyword1
     - keyword2

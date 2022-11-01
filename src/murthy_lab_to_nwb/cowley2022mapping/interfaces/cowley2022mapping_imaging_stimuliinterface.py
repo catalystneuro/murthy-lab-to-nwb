@@ -53,7 +53,7 @@ class Cowley2022MappingImagingStimuliInterface(BaseDataInterface):
         name = zip_file_path.stem
         rate = 30.0  # Hz  (makes for stimuli duration of around 2 seconds)
         unit = "values between 0 and 255"
-        wrapped_data = H5DataIO(image_data)
+        wrapped_data = H5DataIO(image_data, compression="gzip", compression_opts=4)
         image_series = ImageSeries(name=name, description=name, data=wrapped_data, rate=rate, unit=unit)
 
         return image_series

@@ -79,9 +79,9 @@ def imaging_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path, s
 if __name__ == "__main__":
 
     # Parameters for conversion
-    stub_test = False
-    data_dir_path = Path("/home/heberto/Murthy-data-share/one2one-mapping")
-    output_dir_path = Path("/home/heberto/conversion_nwb/")
+    stub_test = False  # Converts a only a stub of the data for quick iteration and testing
+    data_dir_path = Path("/home/heberto/Murthy-data-share/one2one-mapping")  # Change to the one in your system
+    output_dir_path = Path("/home/heberto/conversion_nwb/")  # nwb files are written to this folder / directory
 
     subject = "210803_201"
     cell_line = "LC11"  # lobula_columnar_neuron cell line

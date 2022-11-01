@@ -44,7 +44,7 @@ class Cowley2022MappingCourtshipAudioInterface(BaseDataInterface):
         nwbfile.create_device(**device_dict)
 
         # Create AcousticWaveformSeries with ndx-sound
-        wrapped_data = H5DataIO(audio_data)
+        wrapped_data = H5DataIO(audio_data, compression="gzip", compression_opts=4)
         acoustic_waveform_series = AcousticWaveformSeries(
             name="audio_waveforms",
             data=wrapped_data,
