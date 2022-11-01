@@ -36,7 +36,7 @@ def courtship_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path,
     # Add movie interface (path stem example 161101_10a05.avi)
     video_file_path_dir = video_dir_path / cell_line
     video_file_paths = [path for path in video_file_path_dir.iterdir() if subject == path.stem.split("_")[0]]
-    
+
     source_data.update(Movie=dict(file_paths=video_file_paths))
 
     # Add Pose Estimation data
@@ -56,13 +56,13 @@ def courtship_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path,
 
     # Add stimuli
     subject_number = int(subject.lstrip("fly"))
-    subject_stimuli = f"fly{subject_number - 1}" 
+    subject_stimuli = f"fly{subject_number - 1}"
     zip_file_path = reconstructed_stimuli_dir_path / f"stimuli_{cell_line}" / f"{subject_stimuli}.zip"
     if zip_file_path.is_file():
         source_data.update(ReconstructedStimuli=dict(zip_file_path=str(zip_file_path)))
     else:
         warnings.warn(f"Reconstructed stimul data not found for cell line {cell_line} and subject {subject}")
-    
+
     # Build the converter
     converter = Cowley2022MappingCourtshipNWBConverter(source_data=source_data)
 
