@@ -67,6 +67,7 @@ Each conversion is organized in a directory of its own in the `src` directory:
  For example, for the conversion `cowley2022mapping` you can find a directory located in `src/murthy-lab-to-nwb/cowley2022mapping`. Inside each conversion directory you can find the following files:
 
 * `cowley2022mapping_courtship_convert_session.py`: this runs a nwb conversion for a courtship session.
+* `cowley2022mapping_courtship_convert_all.py`: this runs the conversion for all the sessions in courtship.
 * `cowley2022mapping_imaging_convert_session.py`: this runs a nwb conversion for an imaging session.
 * `cowley2022mapping_requirements.txt`: dependencies specific to this conversion specifically.
 * `widget_demostration_courtship.ipynb`  jupyter notebook with visulization tools for the courtship nwb file
@@ -85,6 +86,11 @@ To run a specific conversion for a full session you can see here the following e
 python src/murthy_lab_to_nwb/cowley2022mapping/cowley2022mapping_courtship_convert_session.py
 python src/murthy_lab_to_nwb/cowley2022mapping/cowley2022mapping_imaging_convert_session.py
 python src/murthy_lab_to_nwb/li2022ecephys/li2022ecephys_convert_session.py
+```
+
+For running the full conversion of all the data the following script is available:
+```
+python src/murthy_lab_to_nwb/cowley2022mapping/cowley2022mapping_courtship_convert_all.py
 ```
 
 You might need to install first some conversion specific dependencies that are located in each conversion directory:
