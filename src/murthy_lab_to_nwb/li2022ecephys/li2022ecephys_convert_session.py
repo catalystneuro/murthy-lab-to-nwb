@@ -66,15 +66,3 @@ if __name__ == "__main__":
         output_dir_path=output_dir_path,
         stub_test=stub_test,
     )
-
-from pathlib import Path
-from murthy_lab_to_nwb.li2022ecephys import li2022ecephys_convert_session
-
-data_dir_path = Path("~/Murthy-data-share/")  # Change to the one in your system
-output_dir_path = Path("~/conversion_nwb/")  # nwb files are written to this folder / directory
-file_path = data_dir_path / "ephys_demo_0007-0008.h5"
-
-li_ecephys_session_to_nwb(
-    file_path=file_path,
-    output_dir_path=output_dir_path,
-)
