@@ -20,6 +20,7 @@ def courtship_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path,
     video_dir_path = data_dir_path / "raw_data" / "courtship_behavior" / "videos"
     audio_dir_path = Path(data_dir_path) / "raw_data" / "courtship_behavior" / "audio"
     joint_positions_data_dir = Path(data_dir_path) / "processed_data" / "joint_positions"
+    reconstructed_stimuli_dir_path = data_dir_path / "processed_data" / "reconstructed_stimuli"
 
     experiment = "courtship_behavior"
     session_id = f"{experiment}_{cell_line}_{subject}"
@@ -43,6 +44,10 @@ def courtship_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path,
     source_data.update(
         Behavior=dict(file_path=str(sound_and_joints_data_path), video_file_path=str(video_file_paths[0]))
     )
+
+    # Add stimuli
+    zip_file_path = reconstructed_stimuli_dir_path / f"stimuli_{cell_line}" / f"{subject}.zip"
+    source_data.update(ReconstructedStimuli=dict(zip_file_path=str(zip_file_path)))
 
     # Build the converter
     converter = Cowley2022MappingCourtshipNWBConverter(source_data=source_data)
@@ -79,6 +84,7 @@ def courtship_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path,
         Movie=dict(external_mode=True, stub_test=stub_test),
         Audio=dict(stub_test=stub_test),
         Behavior=dict(),
+        ReconstructedStimuli=dict(stub_test=stub_test),
     )
     converter.run_conversion(
         nwbfile_path=nwbfile_path,
@@ -91,9 +97,10 @@ def courtship_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path,
 if __name__ == "__main__":
 
     # Parameters for conversion
-    stub_test = False
-    data_dir_path = Path("/home/heberto/Murthy-data-share/one2one-mapping")
-    output_dir_path = Path("/home/heberto/conversion_nwb/")
+    stub_test = False  # Converts a only a stub of the data for quick iteration and testing
+    data_dir_path = Path("/home/heberto/Murthy-data-share/one2one-mapping")  # Change to the one in your system
+    output_dir_path = Path("/home/heberto/conversion_nwb/")  # nwb files are written to this folder / directory
+
     subject = "fly1"
     cell_line = "LC4"  # lobula_columnar_neuron cell line
 

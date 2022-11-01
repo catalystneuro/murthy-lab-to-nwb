@@ -7,6 +7,7 @@ from scipy.io import loadmat
 from pynwb.file import NWBFile, ProcessingModule
 from neuroconv.basedatainterface import BaseDataInterface
 from ndx_sound import AcousticWaveformSeries
+from hdmf.backends.hdf5.h5_utils import H5DataIO
 
 
 class Cowley2022MappingCourtshipAudioInterface(BaseDataInterface):
@@ -43,12 +44,14 @@ class Cowley2022MappingCourtshipAudioInterface(BaseDataInterface):
         nwbfile.create_device(**device_dict)
 
         # Create AcousticWaveformSeries with ndx-sound
+        wrapped_data = H5DataIO(audio_data, compression="gzip", compression_opts=4)
         acoustic_waveform_series = AcousticWaveformSeries(
             name="audio_waveforms",
-            data=audio_data,
+            data=wrapped_data,
             rate=10.0,
             description="acoustic stimulus",
             conversion=conversion,
         )
 
         nwbfile.add_acquisition(acoustic_waveform_series)
+        return nwbfile

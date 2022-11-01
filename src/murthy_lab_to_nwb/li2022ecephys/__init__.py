@@ -1,1 +1,2 @@
 from .li2022ecephysnwbconverter import Li2022EcephysNWBConverter
+from .li2022ecephys_convert_session import li_ecephys_session_to_nwb

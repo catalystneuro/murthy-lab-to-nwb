@@ -8,6 +8,7 @@ from neuroconv.datainterfaces import (
 from .interfaces import (
     Cowley2022MappingCourtshipBehaviorInterface,
     Cowley2022MappingCourtshipAudioInterface,
+    Cowley2022MappingCourtshipStimuliInterface,
     Cowley2022MappingImagingBehaviorInterface,
     Cowley2022MappingImagingMultipleInterface,
     Colwey2022MappingSegmentationInterface,
@@ -22,6 +23,7 @@ class Cowley2022MappingCourtshipNWBConverter(NWBConverter):
         Movie=MovieInterface,
         Audio=Cowley2022MappingCourtshipAudioInterface,
         Behavior=Cowley2022MappingCourtshipBehaviorInterface,
+        ReconstructedStimuli=Cowley2022MappingCourtshipStimuliInterface,
     )
 
 
