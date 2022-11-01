@@ -1,8 +1,15 @@
 # murthy-lab-to-nwb
 NWB conversion scripts for Murthy lab data to the [Neurodata Without Borders](https://nwb-overview.readthedocs.io/) data format.
 
+## Basic installation
+You can install the latest release of the package with pip:
+
+```
+pip install murthy-lab-to-nwb
+```
+
 ## Clone and install
-To run the conversion some basic machinery is needed: **python, git and pip**. For most users, we recommend you to install `conda` ([installation instructions](https://docs.conda.io/en/latest/miniconda.html)) as it contains all the required machinery in a single and simple install. If your system is windows you might also need to install `git` ([installation instructions](https://github.com/git-guides/install-git)) to interact with this repository.
+To install the conversion from GitHub you will need to use git. For most users, we recommend you to install `conda` ([installation instructions](https://docs.conda.io/en/latest/miniconda.html)) as it contains all the required machinery in a single and simple install. If your system is windows you might also need to install `git` ([installation instructions](https://github.com/git-guides/install-git)) to interact with this repository.
 
 From a terminal (note that conda should install one in your system) you can do the following:
 
@@ -24,12 +31,6 @@ pip install -e .
 Note:
 both of the methods above install the repository in [editable mode](https://pip.pypa.io/en/stable/cli/pip_install/#editable-installs)
 
-#### Pip installation
-You can also install the latest release of the package with pip:
-
-```
-pip install murthy-lab-to-nwb
-```
 
 ## Repository structure
 Each conversion is organized in a directory of its own in the `src` directory:
