@@ -17,18 +17,18 @@ NWBFile:
   related_publications:
     https://doi.org/10.1101/2022.07.18.500505
   session_description:
-    The rich variety of behaviors observed in animals arises through the complex interplay between 
-    sensory processing and motor control. To understand these sensorimotor transformations, 
-    it is useful to build models that predict not only neural responses to sensory input but also how each neuron 
-    causally contributes to behavior. Here we demonstrate a novel modeling approach to identify a one-to-one mapping 
-    between internal units in a deep neural network and real neurons by predicting the behavioral changes arising from 
-    systematic perturbations of more than a dozen neuron types.  A key ingredient we introduce is “knockout training”, 
-    which involves perturbing the network during training to match the perturbations of the real neurons during 
-    behavioral experiments. We apply this approach to model the sensorimotor transformation of Drosophila melanogaster 
+    The rich variety of behaviors observed in animals arises through the complex interplay between
+    sensory processing and motor control. To understand these sensorimotor transformations,
+    it is useful to build models that predict not only neural responses to sensory input but also how each neuron
+    causally contributes to behavior. Here we demonstrate a novel modeling approach to identify a one-to-one mapping
+    between internal units in a deep neural network and real neurons by predicting the behavioral changes arising from
+    systematic perturbations of more than a dozen neuron types.  A key ingredient we introduce is “knockout training”,
+    which involves perturbing the network during training to match the perturbations of the real neurons during
+    behavioral experiments. We apply this approach to model the sensorimotor transformation of Drosophila melanogaster
     males during a complex, visually-guided social behavior. Contrary to prevailing views,
     our model suggests that visual projection neurons at the interface between the eye and brain form a
     distributed population code that collectively sculpts social behavior. Overall, our framework consolidates behavioral
-    effects elicited from various neural perturbations into a single, unified model, providing a detailed map from 
+    effects elicited from various neural perturbations into a single, unified model, providing a detailed map from
     stimulus to neuron to behavior.
 Subject:
   species: Drosophila melanogaster
@@ -36,12 +36,12 @@ Subject:
   sex: M
   description: For all experiments, we used 4-7 day old virgin flies harvested from density-controlled bottles seeded
                 with 8 males and 8 females. Fly bottles were kept at 25°C and 60% relative humidity.
-                Virgined flies were then housed individually across all experiments. Female virgined flies were 
-                individually housed and kept in behavioral incubators under a 12-12 hr light-dark cycling. 
+                Virgined flies were then housed individually across all experiments. Female virgined flies were
+                individually housed and kept in behavioral incubators under a 12-12 hr light-dark cycling.
                 Prior to recording with a female, males were painted with a small spot of opaque ultraviolet-
-                cured glue (Norland Optical and Electronic Adhesives) on the dorsal mesothorax to facilitate 
-                identification during tracking. Data from CS-blind flies were collected in a previous study. 
-                UAS-TNT-C was obtained from the Bloomington stock center. 
+                cured glue (Norland Optical and Electronic Adhesives) on the dorsal mesothorax to facilitate
+                identification during tracking. Data from CS-blind flies were collected in a previous study.
+                UAS-TNT-C was obtained from the Bloomington stock center.
                 All LC lines and BDP control were generously provided by Michael Reiser.
 Ophys:
   Device:
