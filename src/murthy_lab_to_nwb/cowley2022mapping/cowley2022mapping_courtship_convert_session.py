@@ -33,17 +33,20 @@ def courtship_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path,
     video_file_paths = [path for path in video_file_path_dir.iterdir() if subject in path.stem]
     source_data.update(Movie=dict(file_paths=video_file_paths))
 
-    # Add audio interface (path stem example 161101_10a05bin.mat)
+    # Add Pose Estimation data
+    pose_estimation_data_path = joint_positions_data_dir / cell_line / f"S_{subject}.mat"
+    source_data.update(
+        PoseEstimation=dict(file_path=str(pose_estimation_data_path), video_file_path=str(video_file_paths[0]))
+    )
+
+    # Add audio interface
     audio_file_path_dir = audio_dir_path / cell_line
     audio_file_path = next(path for path in audio_file_path_dir.iterdir() if subject in path.stem)
     source_data.update(Audio=dict(file_path=str(audio_file_path)))
 
-    # Add Behavior interface
-    file_name = f"S_{subject}.mat"
-    sound_and_joints_data_path = joint_positions_data_dir / cell_line / file_name
-    source_data.update(
-        Behavior=dict(file_path=str(sound_and_joints_data_path), video_file_path=str(video_file_paths[0]))
-    )
+    # Add audio segmentation data
+    audio_segmentation_data_path = joint_positions_data_dir / cell_line / f"S_{subject}.mat"
+    source_data.update(AudioSegmentation=dict(file_path=str(audio_segmentation_data_path)))
 
     # Add stimuli
     zip_file_path = reconstructed_stimuli_dir_path / f"stimuli_{cell_line}" / f"{subject}.zip"
@@ -82,8 +85,9 @@ def courtship_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path,
     # Set conversion options and run conversion
     conversion_options = dict(
         Movie=dict(external_mode=True, stub_test=stub_test),
+        PoseEstimation=dict(),
         Audio=dict(stub_test=stub_test),
-        Behavior=dict(),
+        AudioSegmentation=dict(),
         ReconstructedStimuli=dict(stub_test=stub_test),
     )
     converter.run_conversion(

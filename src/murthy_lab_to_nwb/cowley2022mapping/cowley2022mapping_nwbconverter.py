@@ -6,12 +6,13 @@ from neuroconv.datainterfaces import (
 )
 
 from .interfaces import (
-    Cowley2022MappingCourtshipBehaviorInterface,
+    Cowley2022MappingCourtshipPoseEstimationInterface,
     Cowley2022MappingCourtshipAudioInterface,
+    Cowley2022MappingCourtshipAudioSegmentationInterface,
     Cowley2022MappingCourtshipStimuliInterface,
-    Cowley2022MappingImagingBehaviorInterface,
     Cowley2022MappingImagingMultipleInterface,
     Colwey2022MappingSegmentationInterface,
+    Cowley2022MappingImagingBehaviorInterface,
     Cowley2022MappingImagingStimuliInterface,
 )
 
@@ -21,8 +22,9 @@ class Cowley2022MappingCourtshipNWBConverter(NWBConverter):
 
     data_interface_classes = dict(
         Movie=MovieInterface,
+        PoseEstimation=Cowley2022MappingCourtshipPoseEstimationInterface,
         Audio=Cowley2022MappingCourtshipAudioInterface,
-        Behavior=Cowley2022MappingCourtshipBehaviorInterface,
+        AudioSegmentation=Cowley2022MappingCourtshipAudioSegmentationInterface,
         ReconstructedStimuli=Cowley2022MappingCourtshipStimuliInterface,
     )
 
