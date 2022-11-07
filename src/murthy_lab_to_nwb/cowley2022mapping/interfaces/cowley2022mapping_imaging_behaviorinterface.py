@@ -61,6 +61,8 @@ class Cowley2022MappingImagingBehaviorInterface(BaseDataInterface):
 
                 # Stimuli is either artificial or characterized with its simulation values
                 stimulus_name = trial_data.get("stim_name", "None")
+                if stimulus_name != "None":
+                    stimulus_name = stimulus_name.split("_")[-1]
 
                 # Add basic info
                 data_dict = dict(
