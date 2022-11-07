@@ -3,7 +3,7 @@ import yaml
 from natsort import natsorted
 
 data_dir_path = Path("/media/heberto/TOSHIBA EXT/Murthy-data-share/one2one-mapping")
-calcium_imaging_dir_path = data_dir_path / "raw_data" / "calcium_imaging" 
+calcium_imaging_dir_path = data_dir_path / "raw_data" / "calcium_imaging"
 
 cell_line_to_subjects_dict = dict()
 all_cell_lines_dir_list = [dir_path for dir_path in calcium_imaging_dir_path.iterdir() if dir_path.is_dir()]
@@ -18,4 +18,3 @@ location_of_the_file = Path(__file__).parent.parent
 file_path_to_save = location_of_the_file / "metadata" / "imaging_subjects.yaml"
 with open(file_path_to_save, "w+") as outfile:
     yaml.dump(cell_line_to_subjects_dict, outfile, allow_unicode=True, sort_keys=False)
-

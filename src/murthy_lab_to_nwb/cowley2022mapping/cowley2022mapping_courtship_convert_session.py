@@ -113,7 +113,9 @@ if __name__ == "__main__":
 
     # Parameters for conversion
     stub_test = False  # Converts a only a stub of the data for quick iteration and testing
-    data_dir_path = Path("/media/heberto/TOSHIBA EXT/Murthy-data-share/one2one-mapping")  # Change to the one in your system
+    data_dir_path = Path(
+        "/media/heberto/TOSHIBA EXT/Murthy-data-share/one2one-mapping"
+    )  # Change to the one in your system
     output_dir_path = Path("/home/heberto/conversion_nwb/")  # nwb files are written to this folder / directory
 
     subject = "fly1"

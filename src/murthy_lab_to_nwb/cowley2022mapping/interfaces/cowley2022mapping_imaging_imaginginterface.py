@@ -20,11 +20,13 @@ class Cowley2022MappingImagingMultipleInterface(BaseImagingExtractorInterface):
         subject_tiff_files = [path for path in subject_tiff_files_dir_path.iterdir()]
         subject_tiff_files_sorted = natsorted(subject_tiff_files, key=lambda x: x.stem)
         imaging_extractors_list = list()
-        for file_path in  subject_tiff_files_sorted:
+        for file_path in subject_tiff_files_sorted:
             try:
-                imaging_extractor = ScanImageTiffImagingExtractor(file_path=str(file_path), sampling_frequency=sampling_frequency)
+                imaging_extractor = ScanImageTiffImagingExtractor(
+                    file_path=str(file_path), sampling_frequency=sampling_frequency
+                )
             except:
                 raise ValueError(f"{file_path} could not be oppened by ScanImage")
             imaging_extractors_list.append(imaging_extractor)
-        
+
         super().__init__(imaging_extractors=imaging_extractors_list)

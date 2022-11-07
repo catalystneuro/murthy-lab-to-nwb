@@ -14,15 +14,14 @@ class Cowley2022MappingSegmentationExtractor(SegmentationExtractor):
         self.responses_file_path = Path(responses_file_path)
         assert self.responses_file_path.is_file(), f"responses file path {self.responses_file_path} not found"
         self.subject_date = subject.split("_", maxsplit=1)[1]
-        
+
         with open(self.responses_file_path, "rb") as f:
             pickled_data = pickle.load(f, encoding="latin1")
-        
+
         subject_data = [data for data in pickled_data if data["file_id"] == self.subject_date]
         assert (
             len(subject_data) > 1
         ), f"data for subject with file_id={self.subject_date} was not found in {self.response_file_path}"
-        
 
         ca_trace_and_timestamps = []
         for trial_data in subject_data:

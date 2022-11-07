@@ -34,7 +34,7 @@ class Cowley2022MappingImagingBehaviorInterface(BaseDataInterface):
         assert (
             len(subject_data) > 1
         ), f"data for subject with file_id={self.subject_date} was not found in {self.response_file_path}"
-        
+
         # Get the data types of the data
         type_to_columns = dict()
         for trial_data in subject_data:
