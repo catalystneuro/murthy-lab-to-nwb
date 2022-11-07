@@ -64,7 +64,7 @@ def courtship_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path,
         warnings.warn(f"Reconstructed stimul data not found for cell line {cell_line} and subject {subject}")
 
     # Build the converter
-    converter = Cowley2022MappingCourtshipNWBConverter(source_data=source_data)
+    converter = Cowley2022MappingCourtshipNWBConverter(source_data=source_data, verbose=verbose)
 
     # Session start time (missing time, only the date part)
     metadata = converter.get_metadata()

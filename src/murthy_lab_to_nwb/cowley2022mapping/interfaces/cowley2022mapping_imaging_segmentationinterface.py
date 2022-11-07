@@ -8,18 +8,21 @@ from neuroconv.datainterfaces.ophys.basesegmentationextractorinterface import Ba
 
 class Cowley2022MappingSegmentationExtractor(SegmentationExtractor):
     def __init__(self, responses_file_path: str, subject: str):
-        # Point to data
-
+        # Point and load data
         super().__init__()
 
         self.responses_file_path = Path(responses_file_path)
-        assert self.responses_file_path.is_file()
-        self.subject = subject
-
+        assert self.responses_file_path.is_file(), f"responses file path {self.responses_file_path} not found"
+        self.subject_date = subject.split("_", maxsplit=1)[1]
+        
         with open(self.responses_file_path, "rb") as f:
             pickled_data = pickle.load(f, encoding="latin1")
-
-        subject_data = [data for data in pickled_data if data["file_id"] == self.subject]
+        
+        subject_data = [data for data in pickled_data if data["file_id"] == self.subject_date]
+        assert (
+            len(subject_data) > 1
+        ), f"data for subject with file_id={self.subject_date} was not found in {self.response_file_path}"
+        
 
         ca_trace_and_timestamps = []
         for trial_data in subject_data:
@@ -34,7 +37,7 @@ class Cowley2022MappingSegmentationExtractor(SegmentationExtractor):
         calcium_trace = np.concatenate([trace_time_tuple[0] for trace_time_tuple in sorted_ca_trace_and_timestamps])
         timestamps = np.concatenate([trace_time_tuple[1] for trace_time_tuple in sorted_ca_trace_and_timestamps])
 
-        # Some of the timestamps and calcium traces data the end is 0s.
+        # Some of the timestamps and calcium traces data the end is full of 0s o.
         # The timestamps do not start in 0
         calcium_trace = calcium_trace[timestamps > 0]
         timestamps = timestamps[timestamps > 0]
