@@ -1,30 +1,20 @@
-"Gets all available subjects from the pickled data"
-
 from pathlib import Path
-import json
 import yaml
-import pickle
+from natsort import natsorted
 
-# General location of the data
-data_dir_path = Path("/home/heberto/Murthy-data-share/one2one-mapping")
-roi_responses_dir_path = data_dir_path / "processed_data" / "LC_responses_dFf" / "responses"
+data_dir_path = Path("/media/heberto/TOSHIBA EXT/Murthy-data-share/one2one-mapping")
+calcium_imaging_dir_path = data_dir_path / "raw_data" / "calcium_imaging"
 
-pickled_file_path_list = [path for path in roi_responses_dir_path.iterdir() if path.suffix == ".pkl"]
+cell_line_to_subjects_dict = dict()
+all_cell_lines_dir_list = [dir_path for dir_path in calcium_imaging_dir_path.iterdir() if dir_path.is_dir()]
+all_cell_lines_dir_list = natsorted(all_cell_lines_dir_list, key=lambda x: x.stem)
 
+for cell_line_dir in all_cell_lines_dir_list:
+    subject_paths_in_cell_line = (subject_path for subject_path in cell_line_dir.iterdir() if subject_path.is_dir())
+    subjects_in_cell_line = [path.stem for path in subject_paths_in_cell_line]
+    cell_line_to_subjects_dict[cell_line_dir.stem] = natsorted(subjects_in_cell_line)
 
-cell_type_to_fly_id = {}
-for pickled_file_path in pickled_file_path_list:
-
-    unpickleFile = open(pickled_file_path, "rb")
-    pickled_data = pickle.load(unpickleFile, encoding="latin1")
-
-    cell_type_to_fly_id[pickled_file_path.stem] = list({data["file_id"] for data in pickled_data})
-
-location_of_the_file = Path(__file__).parent
-file_path_to_save = location_of_the_file / "all_subjects.json"
-with open(file_path_to_save, "w") as outfile:
-    json.dump(cell_type_to_fly_id, outfile)
-
-file_path_to_save = location_of_the_file / "all_subjects.yaml"
+location_of_the_file = Path(__file__).parent.parent
+file_path_to_save = location_of_the_file / "metadata" / "imaging_subjects.yaml"
 with open(file_path_to_save, "w+") as outfile:
-    yaml.dump(cell_type_to_fly_id, outfile, allow_unicode=True)
+    yaml.dump(cell_line_to_subjects_dict, outfile, allow_unicode=True, sort_keys=False)
