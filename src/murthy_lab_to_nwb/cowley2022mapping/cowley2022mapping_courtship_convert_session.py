@@ -64,7 +64,7 @@ def courtship_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path,
         warnings.warn(f"Reconstructed stimul data not found for cell line {cell_line} and subject {subject}")
 
     # Build the converter
-    converter = Cowley2022MappingCourtshipNWBConverter(source_data=source_data)
+    converter = Cowley2022MappingCourtshipNWBConverter(source_data=source_data, verbose=verbose)
 
     # Session start time (missing time, only the date part)
     metadata = converter.get_metadata()
@@ -113,7 +113,9 @@ if __name__ == "__main__":
 
     # Parameters for conversion
     stub_test = False  # Converts a only a stub of the data for quick iteration and testing
-    data_dir_path = Path("/home/heberto/Murthy-data-share/one2one-mapping")  # Change to the one in your system
+    data_dir_path = Path(
+        "/media/heberto/TOSHIBA EXT/Murthy-data-share/one2one-mapping"
+    )  # Change to the one in your system
     output_dir_path = Path("/home/heberto/conversion_nwb/")  # nwb files are written to this folder / directory
 
     subject = "fly1"

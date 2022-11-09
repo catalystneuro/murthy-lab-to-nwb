@@ -7,10 +7,12 @@ from neuroconv.utils import load_dict_from_file, dict_deep_update
 from murthy_lab_to_nwb.cowley2022mapping import Cowley2022MappingImagingNWBConverter
 from pathlib import Path
 
-# cell line is lobula_columnar_neuron_cell_line
 
-
-def imaging_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path, stub_test=False):
+def imaging_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path, stub_test=False, verbose=False):
+    if verbose:
+        print("---------------------")
+        print("conversion for:")
+        print(f"{cell_line=} and {subject=}")
 
     data_dir_path = Path(data_dir_path)
     output_dir_path = Path(output_dir_path)
@@ -19,7 +21,7 @@ def imaging_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path, s
     output_dir_path.mkdir(parents=True, exist_ok=True)
 
     # Data directories
-    tiff_dir_path = data_dir_path / "raw_data" / "calcium_imaging" / "example_tiffs"
+    calcium_imaging_dir_path = data_dir_path / "raw_data" / "calcium_imaging"
     roi_responses_dir_path = data_dir_path / "processed_data" / "LC_responses_dFf" / "responses"
     imaging_stimuli_dir_path = data_dir_path / "processed_data" / "LC_responses_dFf" / "stimuli" / "images"
 
@@ -30,7 +32,10 @@ def imaging_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path, s
     source_data = dict()
 
     # Add Imaging data
-    source_data.update(dict(Imaging=dict(subject=subject, tiff_dir_path=str(tiff_dir_path), sampling_frequency=50)))
+    subject_tiff_files_dir_path = calcium_imaging_dir_path / f"{cell_line}" / f"{subject}"
+    source_data.update(
+        dict(Imaging=dict(subject_tiff_files_dir_path=str(subject_tiff_files_dir_path), sampling_frequency=50))
+    )
 
     # Add behavior
     responses_file_path = roi_responses_dir_path / f"{cell_line}.pkl"
@@ -43,12 +48,12 @@ def imaging_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path, s
     source_data.update(dict(Stimuli=dict(stimuli_folder_path=str(imaging_stimuli_dir_path))))
 
     # Gather them all in a converter
-    converter = Cowley2022MappingImagingNWBConverter(source_data=source_data)
+    converter = Cowley2022MappingImagingNWBConverter(source_data=source_data, verbose=verbose)
 
     # Session start time (missing time, only including the date part)
     metadata = converter.get_metadata()
 
-    date_string = subject.split("_")[0]
+    date_string = subject.split("_")[1]
     date_string = f"20{date_string}"
     tzinfo = ZoneInfo("US/Eastern")
     metadata["NWBFile"]["session_start_time"] = datetime.datetime(
@@ -62,7 +67,7 @@ def imaging_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path, s
     metadata = dict_deep_update(metadata, editable_metadata)
 
     # Add some more subject metadata
-    metadata["Subject"]["subject_id"] = subject
+    metadata["Subject"]["subject_id"] = subject.split("_")[0]
 
     # Set conversion options and run conversion
     conversion_options = dict(
@@ -80,10 +85,10 @@ if __name__ == "__main__":
 
     # Parameters for conversion
     stub_test = False  # Converts a only a stub of the data for quick iteration and testing
-    data_dir_path = Path("/home/heberto/Murthy-data-share/one2one-mapping")  # Change to the one in your system
+    data_dir_path = Path("/media/heberto/TOSHIBA EXT/Murthy-data-share/one2one-mapping")  # Change to your system
     output_dir_path = Path("/home/heberto/conversion_nwb/")  # nwb files are written to this folder / directory
 
-    subject = "210803_201"
+    subject = "fly5_210803_201"
     cell_line = "LC11"  # lobula_columnar_neuron cell line
 
     imaging_session_to_nwb(

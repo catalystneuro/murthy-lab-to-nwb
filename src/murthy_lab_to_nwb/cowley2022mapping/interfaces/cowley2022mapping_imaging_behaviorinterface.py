@@ -17,8 +17,8 @@ class Cowley2022MappingImagingBehaviorInterface(BaseDataInterface):
         # Point to data
 
         self.responses_file_path = Path(responses_file_path)
-        assert self.responses_file_path.is_file()
-        self.subject = subject
+        assert self.responses_file_path.is_file(), f"responses file path {self.responses_file_path} not found"
+        self.subject_date = subject.split("_", maxsplit=1)[1]
 
     def get_metadata(self):
         # Automatically retrieve as much metadata as possible
@@ -30,7 +30,10 @@ class Cowley2022MappingImagingBehaviorInterface(BaseDataInterface):
         with open(self.responses_file_path, "rb") as f:
             pickled_data = pickle.load(f, encoding="latin1")
 
-        subject_data = [data for data in pickled_data if data["file_id"] == self.subject]
+        subject_data = [data for data in pickled_data if data["file_id"] == self.subject_date]
+        assert (
+            len(subject_data) > 1
+        ), f"data for subject with file_id={self.subject_date} was not found in {self.response_file_path}"
 
         # Get the data types of the data
         type_to_columns = dict()
@@ -61,6 +64,8 @@ class Cowley2022MappingImagingBehaviorInterface(BaseDataInterface):
 
                 # Stimuli is either artificial or characterized with its simulation values
                 stimulus_name = trial_data.get("stim_name", "None")
+                if stimulus_name != "None":
+                    stimulus_name = stimulus_name.split("_")[-1]
 
                 # Add basic info
                 data_dict = dict(
