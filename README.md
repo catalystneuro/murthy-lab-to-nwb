@@ -20,7 +20,7 @@ You can run any of the scripts on the following list:
 * [Convert one session, Li 2022](https://github.com/catalystneuro/murthy-lab-to-nwb/blob/main/src/murthy_lab_to_nwb/li2022ecephys/li2022ecephys_convert_session.py)
 
 ## Installation from Github
-Another option is to install the package directly from Github. This option has the advantage that the source code can be modify if you need to amend or modify some of the code provided by us. To install the conversion from GitHub you will need to use `git` ([installation instructions](https://github.com/git-guides/install-git)). We also recommend the installation of `conda` ([installation instructions](https://docs.conda.io/en/latest/miniconda.html)) as it contains all the required machinery in a single and simple instal
+Another option is to install the package directly from Github. This option has the advantage that the source code can be modifed if you need to amend some of the code we originally provided to adapt to future experimental differences. To install the conversion from GitHub you will need to use `git` ([installation instructions](https://github.com/git-guides/install-git)). We also recommend the installation of `conda` ([installation instructions](https://docs.conda.io/en/latest/miniconda.html)) as it contains all the required machinery in a single and simple instal
 
 From a terminal (note that conda should install one in your system) you can do the following:
 
