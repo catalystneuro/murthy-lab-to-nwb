@@ -7,9 +7,20 @@ You can install the latest release of the package with pip:
 ```
 pip install murthy-lab-to-nwb
 ```
+### Running a specific conversion
 
-## Clone and install
-To install the conversion from GitHub you will need to use git. For most users, we recommend you to install `conda` ([installation instructions](https://docs.conda.io/en/latest/miniconda.html)) as it contains all the required machinery in a single and simple install. If your system is windows you might also need to install `git` ([installation instructions](https://github.com/git-guides/install-git)) to interact with this repository.
+Once you have installed the package with pip, you can run any of the conversion scripts in a notebook or a python file.
+
+You can run any of the scripts on the following list:
+
+* [Convert one courtship session, Cowley 2022](https://github.com/catalystneuro/murthy-lab-to-nwb/blob/main/src/murthy_lab_to_nwb/cowley2022mapping/cowley2022mapping_courtship_convert_session.py)
+* [Convert one imaging session, Cowley 2022](https://github.com/catalystneuro/murthy-lab-to-nwb/blob/main/src/murthy_lab_to_nwb/cowley2022mapping/cowley2022mapping_imaging_convert_session.py)
+* [Convert all courtship sessions, Cowley 2022](https://github.com/catalystneuro/murthy-lab-to-nwb/blob/main/src/murthy_lab_to_nwb/cowley2022mapping/cowley2022mapping_courtship_convert_all.py)
+* [Convert all imaging sessions, Cowley 200](https://github.com/catalystneuro/murthy-lab-to-nwb/blob/main/src/murthy_lab_to_nwb/cowley2022mapping/cowley2022mapping_imaging_convert_all.py)
+* [Convert one session, Li 2022](https://github.com/catalystneuro/murthy-lab-to-nwb/blob/main/src/murthy_lab_to_nwb/li2022ecephys/li2022ecephys_convert_session.py)
+
+## Installation from Github
+Another option is to install the package directly from Github. This option has the advantage that the source code can be modify if you need to amend or modify some of the code provided by us. To install the conversion from GitHub you will need to use `git` ([installation instructions](https://github.com/git-guides/install-git)). We also recommend the installation of `conda` ([installation instructions](https://docs.conda.io/en/latest/miniconda.html)) as it contains all the required machinery in a single and simple instal
 
 From a terminal (note that conda should install one in your system) you can do the following:
 
@@ -19,9 +30,11 @@ cd murthy-lab-to-nwb
 conda env create --file make_env.yml
 conda activate murthy-lab-to-nwb-env
 ```
-This create a [conda environment](https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/environments.html) which isolates the conversion from your system. We recommend that you run all your conversion related tasks and analysis from that environment to minimize the intereference of this code with your own system.
+
+This creates a [conda environment](https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/environments.html) which isolates the conversion code from your system libraries.  We recommend that you run all your conversion related tasks and analysis from the created environment in order to minimize configuration or libraries issues.
 
 Alternatively, if you want to avoid conda altogether (for example if you use another virtual environment tool) you can install the repository with the following commands using only pip:
+
 ```
 git clone https://github.com/catalystneuro/murthy-lab-to-nwb
 cd murthy-lab-to-nwb
@@ -31,6 +44,26 @@ pip install -e .
 Note:
 both of the methods above install the repository in [editable mode](https://pip.pypa.io/en/stable/cli/pip_install/#editable-installs)
 
+
+
+### Running a specific conversion
+To run a specific conversion for a full session you can see here the following examples
+
+```
+python src/murthy_lab_to_nwb/cowley2022mapping/cowley2022mapping_courtship_convert_session.py
+python src/murthy_lab_to_nwb/cowley2022mapping/cowley2022mapping_imaging_convert_session.py
+python src/murthy_lab_to_nwb/li2022ecephys/li2022ecephys_convert_session.py
+```
+
+For running the full conversion of all the data the following script is available:
+```
+python src/murthy_lab_to_nwb/cowley2022mapping/cowley2022mapping_courtship_convert_all.py
+```
+
+You might need to install first some conversion specific dependencies that are located in each conversion directory:
+```
+pip install -r src/murthy_lab_to_nwb/cowley2022mapping/cowley2022mapping_requirements.txt
+```
 
 ## Repository structure
 Each conversion is organized in a directory of its own in the `src` directory:
@@ -78,23 +111,3 @@ Plus the following directories:
 * `interfaces` directory which holds the interfaces required in this conversion.
 * `metadata` directory which holds the editable yaml metadata files to add extra metadata to the conversions.
 * `utils` miscellaneous utilities for the conversion.
-
-
-## Running a specific conversion
-To run a specific conversion for a full session you can see here the following examples
-
-```
-python src/murthy_lab_to_nwb/cowley2022mapping/cowley2022mapping_courtship_convert_session.py
-python src/murthy_lab_to_nwb/cowley2022mapping/cowley2022mapping_imaging_convert_session.py
-python src/murthy_lab_to_nwb/li2022ecephys/li2022ecephys_convert_session.py
-```
-
-For running the full conversion of all the data the following script is available:
-```
-python src/murthy_lab_to_nwb/cowley2022mapping/cowley2022mapping_courtship_convert_all.py
-```
-
-You might need to install first some conversion specific dependencies that are located in each conversion directory:
-```
-pip install -r src/murthy_lab_to_nwb/cowley2022mapping/cowley2022mapping_requirements.txt
-```
