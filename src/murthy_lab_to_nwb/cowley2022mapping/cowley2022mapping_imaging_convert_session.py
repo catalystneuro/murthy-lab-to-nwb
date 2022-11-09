@@ -7,8 +7,6 @@ from neuroconv.utils import load_dict_from_file, dict_deep_update
 from murthy_lab_to_nwb.cowley2022mapping import Cowley2022MappingImagingNWBConverter
 from pathlib import Path
 
-# cell line is lobula_columnar_neuron_cell_line
-
 
 def imaging_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path, stub_test=False, verbose=False):
     if verbose:
@@ -87,9 +85,7 @@ if __name__ == "__main__":
 
     # Parameters for conversion
     stub_test = False  # Converts a only a stub of the data for quick iteration and testing
-    data_dir_path = Path(
-        "/media/heberto/TOSHIBA EXT/Murthy-data-share/one2one-mapping"
-    )  # Change to the one in your system
+    data_dir_path = Path("/media/heberto/TOSHIBA EXT/Murthy-data-share/one2one-mapping")  # Change to your system
     output_dir_path = Path("/home/heberto/conversion_nwb/")  # nwb files are written to this folder / directory
 
     subject = "fly5_210803_201"
