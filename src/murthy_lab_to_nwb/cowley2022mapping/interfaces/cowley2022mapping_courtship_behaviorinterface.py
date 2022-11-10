@@ -99,7 +99,6 @@ class Cowley2022MappingCourtshipBehaviorInterface(BaseDataInterface):
         processing_module_name = "Male behavior"
         description = "Module with reconstructed time series of the male movements. Used in the paper for reconstruction of the male fly stimuli and network training"
         nwb_processing_behavior = nwbfile.create_processing_module(name=processing_module_name, description=description)
-        
 
         # Exclude as these are added as events, a more appropiate format.
         audio_segmentation_keys = ["sine_bits", "pfast_pulse_bits", "pslow_pulse_bits"]
@@ -111,5 +110,5 @@ class Cowley2022MappingCourtshipBehaviorInterface(BaseDataInterface):
 
             time_series = TimeSeries(name=name, data=data, description=description, rate=sample_rate, unit="n.a.")
             nwb_processing_behavior.add(time_series)
-            
+
         return nwbfile
