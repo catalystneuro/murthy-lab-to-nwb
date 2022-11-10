@@ -11,6 +11,8 @@ verbose = True  # Displays verbose information per conversion
 data_dir_path = Path("/media/heberto/TOSHIBA EXT/Murthy-data-share/one2one-mapping")  # Change to the one in your system
 output_dir_path = Path("/home/heberto/conversion_nwb/")  # nwb files are written to this folder / directory
 
+# This should be changed to point to a local copy of:
+# https://github.com/catalystneuro/murthy-lab-to-nwb/blob/main/src/murthy_lab_to_nwb/cowley2022mapping/metadata/courtship_subjects.yaml
 all_subjects_file_path = Path(__file__).parent / "metadata" / "imaging_subjects.yaml"
 all_courtship_subjects = load_dict_from_file(all_subjects_file_path)
 
