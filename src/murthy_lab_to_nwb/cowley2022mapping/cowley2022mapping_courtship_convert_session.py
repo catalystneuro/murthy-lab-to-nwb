@@ -26,6 +26,7 @@ def courtship_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path,
     audio_dir_path = Path(data_dir_path) / "raw_data" / "courtship_behavior" / "audio"
     joint_positions_data_dir = Path(data_dir_path) / "processed_data" / "joint_positions"
     reconstructed_stimuli_dir_path = data_dir_path / "processed_data" / "reconstructed_stimuli"
+    male_behavior_data_dir = data_dir_path / "processed_data" / "male_behavior"
 
     experiment = "courtship_behavior"
     session_id = f"{experiment}_{cell_line}_{subject}"
@@ -50,9 +51,11 @@ def courtship_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path,
     audio_file_path = next(path for path in audio_file_path_dir.iterdir() if subject in path.stem)
     source_data.update(Audio=dict(file_path=str(audio_file_path)))
 
-    # Add audio segmentation data
-    audio_segmentation_data_path = joint_positions_data_dir / cell_line / f"S_{subject}.mat"
-    source_data.update(AudioSegmentation=dict(file_path=str(audio_segmentation_data_path)))
+    # Add behavior interface (includes audio segmentation and behavior for stimuli reconstruction)
+    subject_number = int(subject.lstrip("fly"))
+    subject_behavior_name = f"fly{subject_number - 1}"
+    behavior_file_path = male_behavior_data_dir / f"{cell_line}" / f"{subject_behavior_name}.pkl"
+    source_data.update(Behavior=dict(file_path=str(behavior_file_path)))
 
     # Add stimuli
     subject_number = int(subject.lstrip("fly"))
@@ -98,7 +101,7 @@ def courtship_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path,
         Movie=dict(external_mode=True, stub_test=stub_test),
         PoseEstimation=dict(),
         Audio=dict(stub_test=stub_test),
-        AudioSegmentation=dict(),
+        Behavior=dict(),
         ReconstructedStimuli=dict(stub_test=stub_test),
     )
     converter.run_conversion(
@@ -113,12 +116,10 @@ if __name__ == "__main__":
 
     # Parameters for conversion
     stub_test = False  # Converts a only a stub of the data for quick iteration and testing
-    data_dir_path = Path(
-        "/media/heberto/TOSHIBA EXT/Murthy-data-share/one2one-mapping"
-    )  # Change to the one in your system
+    data_dir_path = Path("/media/heberto/TOSHIBA EXT/Murthy-data-share/one2one-mapping")  # Change to your system dir
     output_dir_path = Path("/home/heberto/conversion_nwb/")  # nwb files are written to this folder / directory
 
-    subject = "fly1"
+    subject = "fly6"
     cell_line = "LC4"  # lobula_columnar_neuron cell line
 
     courtship_session_to_nwb(
