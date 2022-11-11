@@ -45,6 +45,12 @@ def courtship_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path,
     source_data.update(
         PoseEstimation=dict(file_path=str(pose_estimation_data_path), video_file_path=str(video_file_paths[0]))
     )
+    
+    # Add audio interface
+    audio_file_path_dir = audio_dir_path / cell_line
+    audio_file_path = next(path for path in audio_file_path_dir.iterdir() if subject in path.stem)
+    source_data.update(Audio=dict(file_path=str(audio_file_path)))
+
 
     # Add behavior interface (includes audio segmentation and behavior for stimuli reconstruction)
     subject_number = int(subject.lstrip("fly"))
