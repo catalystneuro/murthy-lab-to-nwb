@@ -4,3 +4,7 @@ nwbinspector
 ndx-pose
 ndx-events
 ndx_sound
+scanimage-tiff-reader
+sleap-io
+opencv-python-headless
+roiextractors
