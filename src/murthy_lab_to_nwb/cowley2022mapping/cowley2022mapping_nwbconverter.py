@@ -1,10 +1,7 @@
 """Primary NWBConverter class for this dataset."""
 
 from neuroconv import NWBConverter
-from neuroconv.datainterfaces import (
-    MovieInterface,
-    SLEAPInterface
-)
+from neuroconv.datainterfaces import MovieInterface, SLEAPInterface
 
 from .interfaces import (
     Cowley2022MappingCourtshipPoseEstimationInterface,

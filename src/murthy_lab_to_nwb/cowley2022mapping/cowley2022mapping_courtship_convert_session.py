@@ -25,7 +25,7 @@ def courtship_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path,
     video_dir_path = data_dir_path / "raw_data" / "courtship_behavior" / "videos"
     audio_dir_path = Path(data_dir_path) / "raw_data" / "courtship_behavior" / "audio"
     joint_positions_data_dir = Path(data_dir_path) / "processed_data" / "joint_positions"
-    sleap_data_dir = Path(data_dir_path) / "processed_data" / "sleap_data" 
+    sleap_data_dir = Path(data_dir_path) / "processed_data" / "sleap_data"
     reconstructed_stimuli_dir_path = data_dir_path / "processed_data" / "reconstructed_stimuli"
     male_behavior_data_dir = data_dir_path / "processed_data" / "male_behavior"
 
