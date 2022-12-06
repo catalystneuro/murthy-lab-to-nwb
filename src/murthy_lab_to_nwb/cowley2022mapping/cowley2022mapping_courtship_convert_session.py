@@ -25,6 +25,7 @@ def courtship_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path,
     video_dir_path = data_dir_path / "raw_data" / "courtship_behavior" / "videos"
     audio_dir_path = Path(data_dir_path) / "raw_data" / "courtship_behavior" / "audio"
     joint_positions_data_dir = Path(data_dir_path) / "processed_data" / "joint_positions"
+    sleap_data_dir = Path(data_dir_path) / "processed_data" / "sleap_data"
     reconstructed_stimuli_dir_path = data_dir_path / "processed_data" / "reconstructed_stimuli"
     male_behavior_data_dir = data_dir_path / "processed_data" / "male_behavior"
 
@@ -41,10 +42,14 @@ def courtship_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path,
     source_data.update(Movie=dict(file_paths=video_file_paths))
 
     # Add Pose Estimation data
-    pose_estimation_data_path = joint_positions_data_dir / cell_line / f"S_{subject}.mat"
-    source_data.update(
-        PoseEstimation=dict(file_path=str(pose_estimation_data_path), video_file_path=str(video_file_paths[0]))
-    )
+    sleap_data_path = sleap_data_dir / cell_line / f"{subject}.slp"
+    if sleap_data_path.is_file():
+        source_data.update(Sleap=dict(file_path=sleap_data_path))
+    else:
+        pose_estimation_data_path = joint_positions_data_dir / cell_line / f"S_{subject}.mat"
+        source_data.update(
+            PoseEstimation=dict(file_path=str(pose_estimation_data_path), video_file_path=str(video_file_paths[0]))
+        )
 
     # Add audio interface
     audio_file_path_dir = audio_dir_path / cell_line
@@ -116,9 +121,8 @@ if __name__ == "__main__":
 
     # Parameters for conversion
     stub_test = False  # Converts a only a stub of the data for quick iteration and testing
-    data_dir_path = Path("/media/heberto/TOSHIBA EXT/Murthy-data-share/one2one-mapping")  # Change to your system dir
-    output_dir_path = Path("/home/heberto/conversion_nwb/")  # nwb files are written to this folder / directory
-
+    data_dir_path = Path("~/Murthy-data-share/one2one-mapping")  # Change to your system's path
+    output_dir_path = Path("~/conversion_nwb/")  # nwb files are written to this folder / directory
     subject = "fly6"
     cell_line = "LC4"  # lobula_columnar_neuron cell line
 

@@ -1,9 +1,7 @@
 """Primary NWBConverter class for this dataset."""
 
 from neuroconv import NWBConverter
-from neuroconv.datainterfaces import (
-    MovieInterface,
-)
+from neuroconv.datainterfaces import MovieInterface, SLEAPInterface
 
 from .interfaces import (
     Cowley2022MappingCourtshipPoseEstimationInterface,
@@ -24,6 +22,7 @@ class Cowley2022MappingCourtshipNWBConverter(NWBConverter):
     data_interface_classes = dict(
         Movie=MovieInterface,
         PoseEstimation=Cowley2022MappingCourtshipPoseEstimationInterface,
+        Sleap=SLEAPInterface,
         Audio=Cowley2022MappingCourtshipAudioInterface,
         Behavior=Cowley2022MappingCourtshipBehaviorInterface,
         ReconstructedStimuli=Cowley2022MappingCourtshipStimuliInterface,

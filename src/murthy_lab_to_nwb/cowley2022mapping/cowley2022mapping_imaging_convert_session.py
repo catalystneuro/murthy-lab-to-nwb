@@ -85,8 +85,8 @@ if __name__ == "__main__":
 
     # Parameters for conversion
     stub_test = False  # Converts a only a stub of the data for quick iteration and testing
-    data_dir_path = Path("/media/heberto/TOSHIBA EXT/Murthy-data-share/one2one-mapping")  # Change to your system
-    output_dir_path = Path("/home/heberto/conversion_nwb/")  # nwb files are written to this folder / directory
+    data_dir_path = Path("~/Murthy-data-share/one2one-mapping")  # Change to your system's path
+    output_dir_path = Path("~/conversion_nwb/")  # nwb files are written to this folder / directory
 
     subject = "fly5_210803_201"
     cell_line = "LC11"  # lobula_columnar_neuron cell line
