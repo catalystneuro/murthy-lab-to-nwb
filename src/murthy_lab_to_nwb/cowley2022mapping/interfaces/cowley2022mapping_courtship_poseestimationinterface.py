@@ -13,7 +13,6 @@ class Cowley2022MappingCourtshipPoseEstimationInterface(BaseDataInterface):
     """My behavior interface docstring"""
 
     def __init__(self, file_path: str, video_file_path: str):
-
         self.sound_and_joints_data_path = Path(file_path)
         self.original_video_file_path = Path(video_file_path)
         assert self.sound_and_joints_data_path.is_file(), "joint joints and sound file not found"
@@ -31,7 +30,6 @@ class Cowley2022MappingCourtshipPoseEstimationInterface(BaseDataInterface):
         self.add_pose_estimation_to_nwb(nwbfile=nwbfile, sound_and_joints_data=sound_and_joints_data)
 
     def add_pose_estimation_to_nwb(self, nwbfile, sound_and_joints_data):
-
         # Extract the joints data
         self.joints_data = sound_and_joints_data["joint_time_sex_position"]
 
@@ -53,10 +51,8 @@ class Cowley2022MappingCourtshipPoseEstimationInterface(BaseDataInterface):
         return nwbfile
 
     def build_pose_estimation_list(self, sex):
-
         pose_estimation_series_list = []
         for node in self.node_to_data_index:
-
             node_trajectory = self.joints_data[self.node_to_data_index[node], :, self.sex_to_data_index[sex], :]
             node_trajectory = node_trajectory.repeat(2, axis=0)  # Increase frequency to video frequency
 

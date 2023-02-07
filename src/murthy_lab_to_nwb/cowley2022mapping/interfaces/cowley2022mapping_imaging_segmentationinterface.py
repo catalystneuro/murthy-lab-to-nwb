@@ -50,20 +50,16 @@ class Cowley2022MappingSegmentationExtractor(SegmentationExtractor):
         self._image_masks = np.ones(shape=(256, 256, 1))
 
     def get_image_size(self):
-
         return np.array((256, 265))
 
     def get_accepted_list(self):
-
         return [0]
 
     def get_rejected_list(self):
-
         return []
 
 
 class Colwey2022MappingSegmentationInterface(BaseSegmentationExtractorInterface):
-
     Extractor = Cowley2022MappingSegmentationExtractor
 
     def __init__(self, responses_file_path: str, subject: str, verbose: str = True):

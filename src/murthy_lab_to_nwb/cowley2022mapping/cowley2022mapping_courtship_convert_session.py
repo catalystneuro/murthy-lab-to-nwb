@@ -118,7 +118,6 @@ def courtship_session_to_nwb(subject, cell_line, data_dir_path, output_dir_path,
 
 
 if __name__ == "__main__":
-
     # Parameters for conversion
     stub_test = False  # Converts a only a stub of the data for quick iteration and testing
     data_dir_path = Path("~/Murthy-data-share/one2one-mapping")  # Change to your system's path

@@ -15,7 +15,6 @@ class Cowley2022MappingCourtshipBehaviorInterface(BaseDataInterface):
     """My behavior interface docstring"""
 
     def __init__(self, file_path: str):
-
         self.file_path = Path(file_path)
         assert self.file_path.is_file(), f"male behavior data {file_path} not found"
 
@@ -37,7 +36,6 @@ class Cowley2022MappingCourtshipBehaviorInterface(BaseDataInterface):
         self.add_male_behavior_time_series(nwbfile=nwbfile, behavior_data=behavior_data)
 
     def add_song_behavior_to_nwb(self, nwbfile, behavior_data):
-
         sample_rate = 30.0  # number of frames /(60 * 30) is equal to 30 min which is the length of the videos
         sine_song_frames = np.nonzero(behavior_data["sine_bits"] == 1)[0]
         sine_timestamps = sine_song_frames / sample_rate

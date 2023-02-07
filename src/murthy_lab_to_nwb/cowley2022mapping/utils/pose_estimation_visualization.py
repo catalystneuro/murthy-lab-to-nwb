@@ -82,7 +82,6 @@ def generate_in_memory_video(
     end_frame,
     frame_offset=0,
 ):
-
     # frame_index_to_frame_function = lambda frame_index: video_reader[frame_index]
     frame_range = range(start_frame, end_frame)
     with VideoCaptureContext(file_path=str(source_video_file_path)) as video_context:
@@ -109,7 +108,6 @@ def generate_in_memory_video(
     new_stream.height = image_shape[0]
 
     for frame in frames_for_video:
-
         encoded_frame = av.VideoFrame.from_ndarray(frame, format="rgb24")
         for packet in new_stream.encode(encoded_frame):
             new_container.mux(packet)
@@ -125,7 +123,6 @@ def generate_in_memory_video(
 
 
 def generate_video_to_display(source_video_file_path, data_df, start_frame, end_frame, frame_offset):
-
     with VideoCaptureContext(file_path=str(source_video_file_path)) as video_context:
         image_shape = video_context.get_frame_shape()
         frame_rate = video_context.get_video_fps()

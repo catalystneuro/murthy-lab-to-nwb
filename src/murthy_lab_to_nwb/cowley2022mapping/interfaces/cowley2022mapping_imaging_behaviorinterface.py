@@ -52,7 +52,6 @@ class Cowley2022MappingImagingBehaviorInterface(BaseDataInterface):
         # Add trials
         trial_dict_list = []
         for trial_data in subject_data:
-
             real_values_dict = {column: trial_data.get(column, np.nan) for column in float_columns}
             array_values_dict = {column: trial_data.get(column, None) for column in array_columns}
 

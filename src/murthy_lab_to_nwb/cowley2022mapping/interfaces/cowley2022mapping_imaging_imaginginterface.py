@@ -14,7 +14,6 @@ class Cowley2022MappingImagingMultipleInterface(BaseImagingExtractorInterface):
     Extractor = MultiImagingExtractor
 
     def __init__(self, subject_tiff_files_dir_path: str, sampling_frequency: float):
-
         subject_tiff_files_dir_path = Path(subject_tiff_files_dir_path)
         assert subject_tiff_files_dir_path.is_dir(), f"{subject_tiff_files_dir_path} is not a folder / directory"
         subject_tiff_files = [path for path in subject_tiff_files_dir_path.iterdir()]
