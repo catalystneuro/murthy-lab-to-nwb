@@ -14,7 +14,6 @@ class Cowley2022MappingCourtshipAudioSegmentationInterface(BaseDataInterface):
     """My behavior interface docstring"""
 
     def __init__(self, file_path: str):
-
         self.sound_and_joints_data_path = Path(file_path)
         assert self.sound_and_joints_data_path.is_file(), "joint joints and sound file not found"
 
@@ -30,7 +29,6 @@ class Cowley2022MappingCourtshipAudioSegmentationInterface(BaseDataInterface):
         self.add_song_behavior_to_nwb(nwbfile=nwbfile, sound_and_joints_data=sound_and_joints_data)
 
     def add_song_behavior_to_nwb(self, nwbfile, sound_and_joints_data):
-
         # Extract the sounds data
         pulse_times = sound_and_joints_data["pulse_times"]  # The timestamps of the pulse event
         pulse_types = sound_and_joints_data["pulse_types"]  # The type (0 is slow and 1 is fast)

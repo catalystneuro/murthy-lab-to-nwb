@@ -18,7 +18,6 @@ from neuroconv.basedatainterface import BaseDataInterface
 
 class Cowley2022MappingImagingStimuliInterface(BaseDataInterface):
     def __init__(self, stimuli_folder_path: str):
-
         self.stimuli_folder_path = Path(stimuli_folder_path)
         assert self.stimuli_folder_path.is_dir(), f"{self.stimuli_folder_path} not a directory/folder"
 

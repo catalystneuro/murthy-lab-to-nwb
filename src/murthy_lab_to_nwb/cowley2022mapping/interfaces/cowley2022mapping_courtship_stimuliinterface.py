@@ -18,7 +18,6 @@ from neuroconv.basedatainterface import BaseDataInterface
 
 class Cowley2022MappingCourtshipStimuliInterface(BaseDataInterface):
     def __init__(self, zip_file_path: str):
-
         self.zip_file_path = Path(zip_file_path)
         assert self.zip_file_path.is_file(), f"{self.zip_file_path} not found"
 

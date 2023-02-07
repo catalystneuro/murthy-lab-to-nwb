@@ -7,7 +7,6 @@ from neuroconv.utils import load_dict_from_file, dict_deep_update
 
 
 def li_ecephys_session_to_nwb(file_path, output_dir_path, stub_test=False):
-
     file_path = Path(file_path)
     assert file_path.exists(), f"file path {file_path} does not exists"
     output_dir_path = Path(output_dir_path)

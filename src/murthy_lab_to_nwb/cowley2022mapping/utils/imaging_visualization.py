@@ -12,7 +12,6 @@ from ipywidgets import widgets
 def trialize_time_series(
     time_series: TimeSeries, trials_table: Union[DynamicTable, pd.DataFrame], index: int = 0
 ) -> pd.DataFrame:
-
     if isinstance(trials_table, DynamicTable):
         trials_table_df = trials_table.to_dataframe()
     else:
@@ -61,7 +60,6 @@ def create_empty_figure():
 
 
 def calculate_moving_average_over_trials(df, moving_average_window):
-
     df_sort = df.sort_values(by="centered_timestamps")
     df_sort["moving_average"] = df_sort["data"].rolling(moving_average_window).mean()
 
@@ -69,7 +67,6 @@ def calculate_moving_average_over_trials(df, moving_average_window):
 
 
 def add_moving_average_traces(figure, df, facet_col, facet_row):
-
     if facet_col is None and facet_row is None:
         num_trials = df["trial"].unique().size
         moving_average_window = 2 * num_trials
@@ -82,7 +79,6 @@ def add_moving_average_traces(figure, df, facet_col, facet_row):
             line=dict(color="black", width=4),
         )
     elif facet_col is not None and facet_row is None:
-
         col_faceting_values = df[facet_col].dropna().unique()
         for col_index, col_face_value in enumerate(col_faceting_values):
             if isinstance(col_face_value, str):
@@ -107,7 +103,6 @@ def add_moving_average_traces(figure, df, facet_col, facet_row):
             )
 
     elif facet_col is None and facet_row is not None:
-
         row_faceting_values = df[facet_row].dropna().unique()
         row_faceting_values.sort()
 
@@ -137,7 +132,6 @@ def add_moving_average_traces(figure, df, facet_col, facet_row):
         row_faceting_values = df[facet_row].dropna().unique()
         for row_index, row_face_value in enumerate(reversed(row_faceting_values)):
             for col_index, col_face_value in enumerate(col_faceting_values):
-
                 if isinstance(col_face_value, str):
                     col_query_string = f"{facet_col}=='{col_face_value}'"
                 else:
@@ -322,7 +316,6 @@ class TrializedTimeSeries(widgets.HBox):
             return f" {children.description} == {children.value} "
 
     def update_plot_widget(self, button_instance):
-
         # Load and prepare data
         self.trialized_data_df = trialize_time_series(
             time_series=self.time_series, trials_table=self.trials_table, index=self.data_column_selection.value

@@ -14,7 +14,6 @@ class Cowley2022MappingCourtshipAudioInterface(BaseDataInterface):
     """My behavior interface docstring"""
 
     def __init__(self, file_path: str):
-
         self.audio_file_path = Path(file_path)
         assert self.audio_file_path.is_file(), "file with audio data not found"
 

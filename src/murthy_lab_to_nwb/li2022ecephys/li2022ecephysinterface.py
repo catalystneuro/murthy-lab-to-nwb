@@ -51,7 +51,6 @@ class Li2022EcephysRecording(BaseRecording):
     is_writable = False
 
     def __init__(self, file_path: str):
-
         self.file = h5py.File(file_path, "r")
         self.header = self.file["header"]
 
@@ -108,11 +107,9 @@ class Li2022EcephysRecording(BaseRecording):
 
 
 class Li2022EcephysInterface(BaseRecordingExtractorInterface):
-
     Extractor = Li2022EcephysRecording
 
     def __init__(self, file_path: str, verbose: bool = True):
-
         super().__init__(verbose=verbose, file_path=file_path)
 
     # def get_metadata_schema(self):
